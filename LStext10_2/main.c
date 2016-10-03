@@ -1,3 +1,9 @@
+/*
+ *NAME:LINKED LIST
+ *TIME:2016.10.3
+ *AUTHOR:LS
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
