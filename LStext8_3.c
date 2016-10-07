@@ -63,9 +63,9 @@ int getDigit(int X,int D)					//取得X第D位的数值
 	for(i = 1;i < D;i++)
 	{
 		//d = X % 10;
-		X = X /10;
+		X = X / Radix;
 	}
-	d = X % 10;
+	d = X % Radix;
 	return d;
 }
 
