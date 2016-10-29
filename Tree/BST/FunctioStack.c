@@ -9,8 +9,8 @@ typedef struct stackRecord *pStack;
 
 struct stackRecord
 {
-        int *base;
-        int *top;
+        Position *base;
+        Position *top;
         int size;
 };
 
@@ -19,9 +19,8 @@ void destoryStack(pStack );
 void clearStack(pStack );
 int isEmpty(pStack );
 int lengthStack(pStack );
-int getTop(pStack );
 void Push(int ,pStack );
-int Pop(pStack );
+Position Pop(pStack );
 */
 
 pStack initStack()
