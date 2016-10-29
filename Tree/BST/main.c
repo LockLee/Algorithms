@@ -36,6 +36,8 @@ int main()
 	Delete(X,T);
 
 	Inorder(T);
+	
+	printf("\n");
 
         return 0;
 }
