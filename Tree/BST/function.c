@@ -2,6 +2,7 @@
  *NAME:BINARY SEARCH TREE FUNCTION
  *TIME:2016.10.16
  *AUTHOR:LS
+ *MODIFICATION:2016.10.29
  */
 
 #include <stdio.h>
@@ -37,7 +38,7 @@ struct TreeNode{
 
 */
 
-/*
+
 void Inorder(SearchTree T)
 {
 	if(T)
@@ -48,9 +49,9 @@ void Inorder(SearchTree T)
 	}
 
 }
-*/
 
-void Inorder(SearchTree T)
+/*
+void Iterative_Inorder(SearchTree T)				//中序遍历非递归方法
 {
 	Position pTmp,pT = T;
 	pStack pS = initStack();
@@ -59,18 +60,18 @@ void Inorder(SearchTree T)
 	{	
 		if(pT)
 		{
-			Push(pT, pS);
+			Push(pT, pS);				//入栈
 			pT = pT->Left;
 		}	
 		else
 		{
-			pTmp = Pop(pS);
+			pTmp = Pop(pS);				//出栈
 			printf("%d	",pTmp->value);
 			pT = pTmp->Right;			
 		}
 	}
 }
- 
+*/
 
 SearchTree MakeEmpty(SearchTree T)				//销毁树，返回NULL
 {
