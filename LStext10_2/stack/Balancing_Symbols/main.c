@@ -1,3 +1,8 @@
+/*
+Name: Balancing_Symbols
+Author: LS
+Time: 2017.9.5
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
@@ -33,6 +38,12 @@ int main(int argc, char **argv)
 			case '(':
 				Push(c, s);
 				break;
+			case '[':
+                                Push(c, s);
+                                break;
+		        case '{':
+                                Push(c, s);
+                                break;
 			case ')':
 				if(IsEmpty(s))
 				{
@@ -49,10 +60,7 @@ int main(int argc, char **argv)
 					Pop(s);
 					break;
 				}
-                        case '[':
-                                Push(c, s);
-                                break;
-			case ']':
+      			case ']':
                                 if(IsEmpty(s))
                                 {
 					flag = 1;
@@ -68,9 +76,6 @@ int main(int argc, char **argv)
                                         Pop(s);
 					break;
 				}
-                        case '{':
-                                Push(c, s);
-                                break;
 			case '}':
                                 if(IsEmpty(s))
                                 {
