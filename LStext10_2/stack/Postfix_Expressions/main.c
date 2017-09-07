@@ -1,3 +1,9 @@
+/*
+ *Name: Postfix_Expressions
+ *Athor: LS
+ *Time:2017.9.7
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
