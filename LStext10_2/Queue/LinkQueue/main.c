@@ -1,10 +1,15 @@
+/*
+ *Name: Link_Queue
+ *Author: LS
+ *Time: 2017.9.8
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "queuelink.h"
 
 int main()
 {
-	int X;
 	LinkQueue *Q;
 	
 	Q = CreateQueue();
