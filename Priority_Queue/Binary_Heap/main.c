@@ -1,3 +1,10 @@
+/*
+ *Name: Binary_Queue
+ *Author: LS
+ *Time: 2017.9.14
+ */
+
+
 #include <stdio.h>
 #include <netdb.h>
 #include "binheap.h"
