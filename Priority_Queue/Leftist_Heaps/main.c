@@ -1,3 +1,9 @@
+/*
+ *Name: Leftist Heap
+ *Author: LS
+ *Time: 2017.9.15
+ */
+
 #include <stdio.h>
 #include "leftistheap.h"
  
