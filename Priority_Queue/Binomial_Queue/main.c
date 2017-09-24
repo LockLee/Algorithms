@@ -11,7 +11,7 @@ int main()
 {
     BinQueue H, H1, H2;    
     Elemtype data1[6] = {65, 24, 12, 51, 16, 18};    
-    Elemtype data2[7] = {24, 65, 51, 23, 14, 26, 13};
+    Elemtype data2[7] = {25, 63, 55, 23, 14, 26, 13};
     int i;
     Elemtype minvalue;
 
