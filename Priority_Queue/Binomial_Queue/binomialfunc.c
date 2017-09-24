@@ -80,55 +80,91 @@ int IsFull(BinQueue H)
 
         return H->currentSize >= Capacity;
 }
-
+/*
+ *将二项树T2合并到二项树T1中
+ *
+ *参数 T1：二项树指针
+ *     T2：二项树指针
+ *
+ *返回二项树T1指针
+ */
 static BinTree CombineTrees(BinTree T1, BinTree T2)
 {
+	//保证函数CombineTrees(T1, T2)中 T1->value 小于等于 T2->value 
 	if(T1->value > T2->value)
 		return CombineTrees(T2, T1);
 	
+	//将T1的左孩子赋给T2的兄弟
 	T2->sibling = T1->left;
+	//是T2成为T1的左孩子
 	T1->left = T2;
 	
 	return T1;
 }
 
+/*
+ *将二项队列H2合并到二项队列H1中
+ *
+ *参数 H1：二项队列指针
+ *     H2: 二项队列指针
+ *
+ *返回二项队列H1指针
+ */
 BinQueue Merge(BinQueue H1, BinQueue H2)
 {
 	BinTree T1, T2, carry;
 	int i, j;
 
+	//二项树临时指针
 	carry = NULL;
 
+	//判断待合并二项队列元素是否超过最大容量
 	if(H1->currentSize + H2->currentSize > Capacity)
 	{
 		fprintf(stderr, "out of space");
 		exit(1);
 	}	
 
+	//更新当前容量
 	H1->currentSize += H2->currentSize;
 	
+	//i用于索引二项队列中二项树的
+	//j表示二项队列最大可能二项树个数，因为N个节点的二项队列中二项树最多有logN个
 	for(i=0, j=1; j <= H1->currentSize; i++, j*=2)
 	{
+		//T1表示二项队列H1中索引为i的二项树
+		//T2表示二项队列H2中索引为i的二项树
 		T1 = H1->theTrees[i];
 		T2 = H2->theTrees[i];
 
+		//如果T1非空，则!!T1为1，否则!!T1为0，T2和carry类似
+		//T1、T2、carry组合共八种情况，分别对应以下情况
 		switch(!!T1 + 2*!!T2 + 4*!!carry)
 		{
+			//T1、T2和carry为空
 			case 0:
+			//T1非空，T2和carry为空
 			case 1:
 				break;
+			//T2非空，T1和carry为空
+			//将二项树T2直接赋给二项队列H1相应位置并清空二项队列H2相应位置
 			case 2:
 				H1->theTrees[i] = T2;
 				H2->theTrees[i] = NULL;
 				break;
+			//carry非空，T1和T2为空
+			//将二项树carry直接赋给二项队列H1相应位置并清空二项树carry
 			case 4:
 				H1->theTrees[i] = carry;
 				carry = NULL;
 				break;
+			//T1和T2非空，carry为空
+			//合并二项树T1、T2，赋给carry，并清空二项队列H1、H2相应位置
 			case 3:
 				carry = CombineTrees(T1, T2);
 				H1->theTrees[i] = H2->theTrees[i] = NULL;
 				break;
+			//类似以上
 			case 5:
 				carry = CombineTrees(T1, carry);
 				H1->theTrees[i] = NULL;
@@ -148,11 +184,20 @@ BinQueue Merge(BinQueue H1, BinQueue H2)
 	return H1;
 }
 
+/*
+ *将元素X插入二项队列H中
+ *
+ *参数 X：待插入元素值
+ *     H：二项队列指针
+ *
+ *无返回值
+ */
 void Insert(Elemtype X, BinQueue H)
 {
 	BinQueue tmp;
 	BinTree newone;
 	
+	//新建一个二项队列
 	tmp = Initialize();
 	newone = (BinTree)malloc(sizeof(struct BinNode));
 	if(newone == NULL)
@@ -164,9 +209,11 @@ void Insert(Elemtype X, BinQueue H)
 	newone->value = X;
 	newone->left = newone->sibling = NULL;
 	
+	//将元素节点链接到二项队列tmp中
 	tmp->currentSize = 1;
 	tmp->theTrees[0] = newone;
 
+	//合并二项队列H和tmp
 	Merge(H, tmp);
 	
 	free(tmp);
