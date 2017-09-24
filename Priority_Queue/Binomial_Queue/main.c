@@ -1,3 +1,8 @@
+/*
+ *Name：Binomial Queue
+ *Author：LS
+ *Time：2017.9.24
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include "binomialheap.h"
