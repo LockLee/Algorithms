@@ -285,6 +285,13 @@ int FindMinIndex(BinQueue H)
         return minindex;
 }
 
+/*
+ *删除二项队列H中最小元素并返回
+ *
+ *参数 H：二项队列指针
+ *
+ *返回二项队列最小值
+ */
 Elemtype DeleteMin(BinQueue H)
 {
 	int i, minIndex;
@@ -299,17 +306,25 @@ Elemtype DeleteMin(BinQueue H)
 		exit(1);
 	}
 
+	//找到二项队列H最小值下标
 	minIndex = FindMinIndex(H);
 	
+	//是oldTree指向最小值二项树
 	oldTree = H->theTrees[minIndex];
+	//将最小值赋给minValue
 	minValue = oldTree->value;
 	
+	//deletedTree指向最小值二项树的左孩子
 	deletedTree = oldTree->left;
 	
+	//释放最小值节点
 	free(oldTree);
 	
+	//新建一个二项队列用于保存被删除最小值二项树的子树
 	deletedQueue = Initialize();
+	//设置新二项队列大小为 (1*2^minIndex-1)
 	deletedQueue->currentSize = (1<<minIndex) - 1;
+	//将被删除二项队列中的二项树依次赋给临时二项队列deletedQueue
 	for(i = minIndex-1; i >= 0; i--)
 	{
 		deletedQueue->theTrees[i] =deletedTree;
@@ -318,8 +333,10 @@ Elemtype DeleteMin(BinQueue H)
 	}
 
 	H->theTrees[minIndex] = NULL;
+	//更新二项队列当前大小
 	H->currentSize -= deletedQueue->currentSize + 1;
 	
+	//合并
 	Merge(H, deletedQueue);
 	
 	return minValue;
