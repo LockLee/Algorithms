@@ -219,13 +219,23 @@ void Insert(Elemtype X, BinQueue H)
 	free(tmp);
 }
 
+/*
+ *找到二项队列H中最小元素并返回
+ *
+ *参数 H：二项队列指针
+ *
+ *返回最小元素值
+ */
 Elemtype FindMinValue(BinQueue H)
 {
 	int i, j;
 	Elemtype minvalue;
 	
 	if(IsEmpty(H))
-		return;
+	{
+		fprintf(stderr,"The Binomial Queue is NULL.\n");
+		exit(1);
+	}	
 	else
 		minvalue = H->theTrees[0]->value;
 	
@@ -239,13 +249,23 @@ Elemtype FindMinValue(BinQueue H)
 	return minvalue;
 }
 
+/*
+ *找到二项队列H中最小元素下标并返回
+ *
+ *参数 H：二项队列指针
+ *
+ *返回最小元素下标值
+ */
 int FindMinIndex(BinQueue H)
 {
         int i, j,minindex;
         Elemtype minvalue;
 
         if(IsEmpty(H))
-                return;
+	{
+		fprintf(stderr,"The Binomial Queue is NULL.\n");
+		exit(1);
+	}
         else
 	{
                 minvalue = H->theTrees[0]->value;
@@ -305,6 +325,7 @@ Elemtype DeleteMin(BinQueue H)
 	return minValue;
 }
 
+//递归销毁二项树
 void DestroyTree(BinTree T)
 {
 	if(T == NULL)
@@ -318,6 +339,7 @@ void DestroyTree(BinTree T)
 	free(T);
 }
 
+//销毁二项队列
 void DestroyQueue(BinQueue H)
 {
 	int i, j;
@@ -334,6 +356,7 @@ void DestroyQueue(BinQueue H)
 	free(H);
 }
 
+//打印二项树
 static void PrintPreorderChildSibling(int depth, BinTree T)
 {            
 	int i;
@@ -356,6 +379,7 @@ static void PrintPreorderChildSibling(int depth, BinTree T)
 	}
 }
 
+//打印二项队列信息
 void PrintBinomialQueue(BinQueue H)
 {
     int i, j;
