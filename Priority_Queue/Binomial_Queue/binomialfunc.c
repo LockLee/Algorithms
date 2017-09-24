@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "binomialheap.h"
 
+//二项树元素节点
 struct BinNode
 {
         Elemtype value;
@@ -9,13 +10,19 @@ struct BinNode
         Position sibling;
 };
 
+//二项队列
 struct Collection
 {
         int currentSize;
         BinTree theTrees[MaxSize];
 };
 
-
+/*
+ *初始化构造一个二项队列
+ *
+ *返回二项队列指针
+ *
+ */
 BinQueue Initialize()
 {
 	int i;
@@ -28,14 +35,23 @@ BinQueue Initialize()
 		exit(1);
 	}
 
+	//二项队列当前元素个数为0
 	H->currentSize = 0;
 	
+	//将二项队列中二项树指针清空
 	for(i=0; i<MaxSize; i++)
 		H->theTrees[i] = NULL;
 
 	return H;
 }
 
+/*
+ *判断二项队列H是否为空
+ *
+ *参数 H：二项队列指针
+ *
+ *如果二项队列为空则返回1，否则返回0
+ */
 int IsEmpty(BinQueue H)
 {
         if(H == NULL)
@@ -47,6 +63,13 @@ int IsEmpty(BinQueue H)
 	return H->currentSize == 0;
 }
 
+/*
+ *判断二项队列H是否满
+ *
+ *参数 H：二项队列指针
+ *
+ *如果二项队列已满则返回1，否则返回0
+ */
 int IsFull(BinQueue H)
 {
         if(H == NULL)
@@ -55,7 +78,7 @@ int IsFull(BinQueue H)
                 exit(1);
         }
 
-        return H->currentSize == Capacity;
+        return H->currentSize >= Capacity;
 }
 
 static BinTree CombineTrees(BinTree T1, BinTree T2)
