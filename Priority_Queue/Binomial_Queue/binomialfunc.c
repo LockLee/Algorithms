@@ -181,8 +181,6 @@ BinQueue Merge(BinQueue H1, BinQueue H2)
 		}
 	}
 
-	//释放二项队列H2的指针
-	free(H2);
 	//返回合并后的H1指针
 	return H1;
 }
@@ -218,7 +216,9 @@ void Insert(Elemtype X, BinQueue H)
 
 	//合并二项队列H和tmp
 	Merge(H, tmp);
-	
+
+	//释放二项队列tmp
+	free(tmp);
 }
 
 /*
@@ -341,6 +341,10 @@ Elemtype DeleteMin(BinQueue H)
 	//合并
 	Merge(H, deletedQueue);
 	
+	//释放二项队列 deletedQueue
+	free(deletedQueue);
+	
+	//返回二项队列最小值
 	return minValue;
 }
 
@@ -409,4 +413,3 @@ void PrintBinomialQueue(BinQueue H)
         PrintPreorderChildSibling(1, H->theTrees[i]);
     }    
 }
-
