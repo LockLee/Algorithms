@@ -181,6 +181,7 @@ BinQueue Merge(BinQueue H1, BinQueue H2)
 		}
 	}
 
+	free(H2);
 	return H1;
 }
 
