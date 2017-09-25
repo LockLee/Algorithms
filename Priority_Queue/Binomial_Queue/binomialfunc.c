@@ -181,7 +181,9 @@ BinQueue Merge(BinQueue H1, BinQueue H2)
 		}
 	}
 
+	//释放二项队列H2的指针
 	free(H2);
+	//返回合并后的H1指针
 	return H1;
 }
 
@@ -217,7 +219,6 @@ void Insert(Elemtype X, BinQueue H)
 	//合并二项队列H和tmp
 	Merge(H, tmp);
 	
-	free(tmp);
 }
 
 /*
