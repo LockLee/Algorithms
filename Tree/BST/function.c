@@ -39,50 +39,76 @@ void Inorder(SearchTree T)
 void Iterative_Inorder(SearchTree T)				
 {
 	Position pTmp,pT = T;
-	pStack pS = initStack();
+	pStack pS = InitStack();
 	
-	while(pT || !isEmpty(pS))
+	//如果左子树非空将左子树入栈，否则出栈打印结果
+	//然后将指针转移到右子树
+	while(pT || !IsEmpty(pS))
 	{	
 		if(pT)
 		{
-			Push(pT, pS);				//入栈
+			Push(pT, pS);
 			pT = pT->Left;
-		}	
+		}
 		else
 		{
-			pTmp = Pop(pS);				//出栈
-			printf("%d	",pTmp->value);
+			pTmp = Pop(pS);			
+			printf("%d	",pTmp->value）；
 			pT = pTmp->Right;			
 		}
 	}
 }
 
-
-SearchTree MakeEmpty(SearchTree T)				//销毁树，返回NULL
+/*
+ *销毁树
+ *
+ *参数 T：二叉搜索树指针
+ */
+void DestroyTree(SearchTree T)			
 {
 
-	if(T)							//如果树不空，递归销毁左子树，右子树
+	//如果树不空，递归销毁左子树，右子树
+	if(T)					
 	{
-		MakeEmpty(T->Left);
-		MakeEmpty(T->Right);
+		DestroyTree(T->Left);
+		DestroyTree(T->Right);
 		free(T);
 	}
-	return NULL;
 }
-
-Position Find(int X,SearchTree T)				//查找元素X
+			       
+/*
+ *在二叉搜索树T中递归查找值X
+ *
+ *参数 X：待查找元素值
+ *     T：二叉搜索树
+ *
+ *如果查找成功则返回元素指针，否则返回NULL
+ */
+Position Find(int X,SearchTree T)				
 {
-	if(!T || X == T->value)					//如果T为NULL或者X == T->value,直接返回T
+	//如果T为NULL或者X == T->value,直接返回T
+	if(!T || X == T->value)					
 		return T;
-	if(X < T->value)					//否则如果X < T->value,递归查找左子树
+	//否则如果X < T->value,递归查找左子树
+	if(X < T->value)					
 		return Find(X,T->Left);
-	else 							//递归查找右子树
+	//否则递归查找右子树
+	else 							
 		return Find(X,T->Right);
 }
+
 /*
-Position Iterative_Find(int X, SearchTree T)			//非递归方法
+ *在二叉搜索树T中非递归查找值X
+ *
+ *参数 X：待查找元素值
+ *     T：二叉搜索树
+ *
+ *如果查找成功则返回元素指针，否则返回NULL
+ */
+Position Iterative_Find(int X, SearchTree T)	
 {
-	while(T && X != T->value)				//迭代寻找T
+	//迭代寻找值X
+	while(T && X != T->value)			
 	{
 		if(X < T->value)
 			T = T->Left;
@@ -91,25 +117,47 @@ Position Iterative_Find(int X, SearchTree T)			//非递归方法
 	}
 	return T;		
 }
-*/
-Position FindMin(SearchTree T)					//查找T的最小元素
+
+/*
+ *在二叉搜索树T中递归查找最小值
+ *
+ *参数 T：二叉搜索树
+ *
+ *如果查找成功则返回最小值元素指针，否则返回NULL
+ */
+Position FindMin(SearchTree T)					
 {
-	if(!T || !T->Left)					//如果T为空说明该树为空，返回NULL；或者T的左子树为空说明T就是最小元素
+	//如果T为空说明该树为空，返回NULL；或者T的左子树为空说明T就是最小元素
+	if(!T || !T->Left)					
 		return T;
 	else 
-		return FindMin(T->Left);			//否则递归查找左子树
+		//否则递归查找左子树
+		return FindMin(T->Left);			
 }
 
 /*
-Position Iterative_FindMin(int X,SearchTree T)			//迭代方法
+ *在二叉搜索树T中非递归查找最小值
+ *
+ *参数 T：二叉搜索树
+ *
+ *如果查找成功则返回最小值元素指针，否则返回NULL
+ */
+Position Iterative_FindMin(int X,SearchTree T)		
 {
-	while(T && T->Left)					//迭代循环寻找该树的最左节点
+	//迭代循环寻找该树的最左节点
+	while(T && T->Left)	
 		T = T->Left;
 	return T;
 }
-*/
 
-Position FindMax(SearchTree T)					//查找T的最大元素，类似
+/*
+ *在二叉搜索树T中递归查找最大值
+ *
+ *参数 T：二叉搜索树
+ *
+ *如果查找成功则返回最大值元素指针，否则返回NULL
+ */
+Position FindMax(SearchTree T)				
 {
 	if(!T || !T->Right)
 		return T;
@@ -118,17 +166,31 @@ Position FindMax(SearchTree T)					//查找T的最大元素，类似
 }
 
 /*
-Position Iterative_FindMax(int X,SearchTree T)			//迭代方法
+ *在二叉搜索树T中非递归查找最大值
+ *
+ *参数 T：二叉搜索树
+ *
+ *如果查找成功则返回最大值元素指针，否则返回NULL
+ */
+Position Iterative_FindMax(SearchTree T)			
 {
 	while(T && T->Right)
 		T = T->Right;
 	return T;
 }
-*/
 
-SearchTree Insert(int X,SearchTree T)				//插入新元素
+/*
+ *在二叉搜索树T中递归插入值X
+ *
+ *参数 X：待插入元素值
+ *     T：二叉搜索树
+ *
+ *返回二叉搜索树
+ */
+SearchTree Insert(int X,SearchTree T)				
 {
-	if(!T)							//如果该树为空，则创建新节点，返回新节点
+	//如果该树为空，则创建新节点，返回新节点
+	if(!T)							
 	{
 		T = (Position)malloc(sizeof(Node));
 		if(!T)
@@ -142,11 +204,15 @@ SearchTree Insert(int X,SearchTree T)				//插入新元素
 			T->Left = T->Right = NULL;
 		}
 	}	
-	else if(X < T->value)					//否则如果X < T->value,在左子树中递归插入
+	//否则如果X < T->value,在左子树中递归插入
+	else if(X < T->value)					
 		T->Left = Insert(X,T->Left);
-	else if(X > T->value)					//在右子树中递归插入
+	//在右子树中递归插入
+	else if(X > T->value)					
 		T->Right = Insert(X,T->Right);	
-	return T;						//在递归中返回插入节点的位置，最后返回该树
+	//在递归中返回插入节点的位置，最后返回该树
+	//这一行很重要，不能漏写
+	return T;						
 }
 
 /*
