@@ -56,7 +56,7 @@ void Iterative_Inorder(SearchTree T)
 		}
 	}
 }
-*/
+
 
 SearchTree MakeEmpty(SearchTree T)				//销毁树，返回NULL
 {
