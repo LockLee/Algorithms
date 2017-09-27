@@ -5,7 +5,7 @@
 
 //初始化栈空间大小为20
 #define STACK_INIT_SIZE 20
-//如果栈满则在多分配5个栈空间
+//如果栈满则再多分配5个栈空间
 #define STACK_INCREASE 5
 
 struct stackRecord;
