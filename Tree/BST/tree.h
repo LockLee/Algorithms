@@ -32,6 +32,7 @@ int Retrieve(Position );
 //中序遍历二叉搜索树
 void Inorder(SearchTree );
 
+//二叉搜索树数据结构
 struct TreeNode{
 	int value;
 	Position Left;
