@@ -10,36 +10,14 @@
 #include <stdlib.h>
 #include "tree.h"
 #include "stackda.h"
+
 /*
-
-#ifndef _Tree_Head_
-#define _Tree_Head_
-
-struct TreeNode;
-typedef struct TreeNode Node;
-typedef struct TreeNode *Position;
-typedef struct TreeNode *SearchTree;
-
-SearchTree MakeEmpty(SearchTree T);
-Position Find(int ,SearchTree );
-Position FindMin(SearchTree );
-Position FindMax(SearchTree );
-SearchTree Insert(int ,SearchTree );
-SearchTree Delete(int ,SearchTree );
-int Retrieve(Position );
-void Inorder(SearchTree );
-
-struct TreeNode{
-        int value;
-        Position Left;
-        Position Right;
-};
-
-#endif
-
-*/
-
-
+ *中序遍历二叉树递归方法
+ *
+ *参数 T：二叉树指针
+ *
+ *打印输出二叉树
+ */
 void Inorder(SearchTree T)
 {
 	if(T)
@@ -52,7 +30,13 @@ void Inorder(SearchTree T)
 }
 
 /*
-void Iterative_Inorder(SearchTree T)				//中序遍历非递归方法
+ *中序遍历非递归方法
+ *
+ *参数 T：二叉树指针
+ *
+ *打印输出二叉树
+ */
+void Iterative_Inorder(SearchTree T)				
 {
 	Position pTmp,pT = T;
 	pStack pS = initStack();
