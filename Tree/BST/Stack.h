@@ -23,19 +23,19 @@ struct stackRecord
 };
 
 //初始化一个容量为20的栈
-pStack initStack( );
+pStack InitStack( );
 
 //销毁栈
-void destoryStack(pStack );
+void DestoryStack(pStack );
 
 //清空栈，使栈顶指向栈底
-void clearStack(pStack );
+void ClearStack(pStack );
 
 //判断栈是否为空
-int isEmpty(pStack );
+int IsEmpty(pStack );
 
 //返回当前栈大小
-int lengthStack(pStack );
+int LenStack(pStack );
 
 //入栈
 void Push(Position ,pStack );
