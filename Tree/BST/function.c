@@ -292,20 +292,27 @@ SearchTree Delete(int X,SearchTree T)
 	//如果待删节点左，右子树都不为空，则用该节点的后继替换该节点
 	else if(T->Left && T->Right)				
 	{
+		//找到该节点的后继节点
 		TmpCell = FindMin(T->Right);
+		//用后继节点的值替换该节点的值
 		T->value = TmpCell->value;
-		T->Right = Delete(T->value,T->Right);		//递归删除后继节点
+		//递归删除后继节点，此时T->value表示后继节点的值
+		T->Right = Delete(T->value,T->Right);		
 	}
-	else							//否则待删节点左子树为空或者右子树为空或者都为空
+	//否则待删节点左子树为空或者右子树为空或者都为空
+	else							
 	{
 		TmpCell = T;
-		if(T->Left == NULL)				//如果左子树为空，用右子树替换该节点
+		//如果左子树为空，用右子树替换该节点
+		if(T->Left == NULL)				
 			T = T->Right;
-		else if(T->Right == NULL)			//右子树为空
+		//右子树为空
+		else if(T->Right == NULL)			
 			T = T->Left;		
 		free(TmpCell);  
 	}
-	return T;						//返回T
+	//返回T
+	return T;						
 }
 /*
 SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
