@@ -216,11 +216,19 @@ SearchTree Insert(int X,SearchTree T)
 }
 
 /*
-SearchTree Iterative_Insert(int X,SearchTree T)			//非递归方法插入节点X	
+ *在二叉搜索树T中非递归插入值X
+ *
+ *参数 X：待插入元素值
+ *     T：二叉搜索树
+ *
+ *返回二叉搜索树
+ */
+SearchTree Iterative_Insert(int X,SearchTree T)			
 {
 	Position p,q,x;
 	
-	x = (Position)malloc(sizeof(Node));			//创建新节点
+	//创建新节点
+	x = (Position)malloc(sizeof(Node));			
 	if(!x)
 	{
 		printf("ERROR!");
@@ -235,7 +243,8 @@ SearchTree Iterative_Insert(int X,SearchTree T)			//非递归方法插入节点X
 	
 	p = NULL;		
 	q = T;
-	while(q)						//迭代循环查找X待插入位置，由p指向
+	//迭代循环查找X待插入位置，由p指向
+	while(q)						
 	{
 		p = q;
 		if(X < q->value)
@@ -243,31 +252,45 @@ SearchTree Iterative_Insert(int X,SearchTree T)			//非递归方法插入节点X
 		else
 			q = q->Right;
 	}
-	if(p == NULL)						//如果p == NULL ,说明该树T == NULL
+	//如果p == NULL ,说明该树T == NULL
+	if(p == NULL)						
 		T = x;
-	else if(X < p->value)					//如果X < p->value,说明X要插在p的左子树上
+	//如果X < p->value,说明X要插在p的左子树上
+	else if(X < p->value)					
 		p->Left = x;
-	else 							//否则插在右子树上
+	//否则插在右子树上
+	else 							
 		p->Right = x;
 
 	return T;
 }
-*/
 
 
-SearchTree Delete(int X,SearchTree T)				//删除元素X
+/*
+ *在二叉搜索树T中递归删除值X
+ *
+ *参数 X：待删除元素值
+ *     T：二叉搜索树
+ *
+ *返回二叉搜索树
+ */
+SearchTree Delete(int X,SearchTree T)				
 {
 	Position TmpCell;
-	if(!T)							//如果树为空，直接返回
+	//如果树为空，直接退出
+	if(!T)							
 	{
 		printf("The Tree is NULL!");
 		exit(1);
 	}
-	else if(X < T->value )					//如果X < T->value，在左子树中递归删除
+	//如果X < T->value，在左子树中递归删除
+	else if(X < T->value )					
 		T->Left = Delete(X,T->Left);
-	else if(X > T->value )					//在右子树中递归删除
+	//在右子树中递归删除
+	else if(X > T->value )					
 		T->Right = Delete(X,T->Right);
-	else if(T->Left && T->Right)				//如果待删节点左，右子树都不为空，则用该节点的后继替换该节点
+	//如果待删节点左，右子树都不为空，则用该节点的后继替换该节点
+	else if(T->Left && T->Right)				
 	{
 		TmpCell = FindMin(T->Right);
 		T->value = TmpCell->value;
