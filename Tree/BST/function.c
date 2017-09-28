@@ -314,11 +314,20 @@ SearchTree Delete(int X,SearchTree T)
 	//返回T
 	return T;						
 }
+
 /*
-SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
+ *在二叉搜索树T中非递归删除值X
+ *
+ *参数 X：待删除元素值
+ *     T：二叉搜索树
+ *
+ *返回二叉搜索树
+ */			       
+SearchTree Delete(int X,SearchTree T)				
 {
 	Position P,Q,Tmp;
-	if(!T)							//如果该树为空，直接退出
+	//如果该树为空，直接退出
+	if(!T)							
 	{
 		printf("The Tree is NULL!");
 		exit(1);
@@ -326,7 +335,8 @@ SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
 	
 	P = NULL;
 	Q = T;
-	while(Q && Q->value != X)				//迭代寻找待删除元素位置，由Q指向，P指向其父节点
+	//迭代寻找待删除元素位置，由Q指向，P指向其父节点
+	while(Q && Q->value != X)				
 	{
 		P = Q;
 		if(X < Q->value)
@@ -335,21 +345,27 @@ SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
 			Q = Q->Right;
 	}
 	
-	if(Q->Left && Q->Right)					//如果待删除元素左右子树都不为空
+	//如果待删除元素左右子树都不为空
+	if(Q->Left && Q->Right)					
 	{
 		Tmp = Q;
 		P = Q;
 		Q = Q->Right;
-		while(Q && Q->Left)				//寻找其后继节点，由Q指向，P指向其后继节点的父节点
+		
+		//寻找其后继节点，由Q指向，P指向其后继节点的父节点
+		while(Q && Q->Left)				
 		{
 			P = Q;
 			Q = Q->Left;
 		}
-		Tmp->value = Q->value;				//将待删元素替换为其后继节点
-		if(Q->value < P->value)				//如果后继节点在P父节点的左子树上，将Q的右子树赋给P->Left
+		//将待删元素替换为其后继节点
+		Tmp->value = Q->value;	
+		//如果后继节点在P父节点的左子树上，将Q的右子树赋给P->Left
+		if(Q->value < P->value)				
 		{
 			P->Left = Q->Right;
-			free(Q);				//清空Q
+			//清空Q
+			free(Q);				
 		}
 		else						//类似
 		{
@@ -358,7 +374,8 @@ SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
 		}
 		
 	}
-	else if(Q->Left == NULL)				//如果待删节点左子树为空
+	//如果待删节点左子树为空
+	else if(Q->Left == NULL)				
 	{
 		if(X < P->value)
 			P->Left = Q->Right;
@@ -366,7 +383,8 @@ SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
 			P->Right = Q->Right;
 		free(Q);
 	}		
-	else							//如果待删节点右子树为空
+	//如果待删节点右子树为空
+	else							
 	{
 		if(X < P->value)
 			P->Left = Q->Left;
@@ -377,4 +395,4 @@ SearchTree Delete(int X,SearchTree T)				//迭代版删除元素X
 
 	return T;
 }
-*/
+
