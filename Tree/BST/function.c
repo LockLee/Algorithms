@@ -318,7 +318,6 @@ SearchTree Delete(int X,SearchTree T)
 }
 
 			       
-/*****
 /*
  *在二叉搜索树T中非递归删除值X
  *
@@ -327,6 +326,8 @@ SearchTree Delete(int X,SearchTree T)
  *
  *返回二叉搜索树
  */			       
+			       
+/*
 SearchTree Delete(int X,SearchTree T)				
 {
 	Position P,Q,Tmp;
@@ -399,4 +400,75 @@ SearchTree Delete(int X,SearchTree T)
 
 	return T;
 }
-*****/
+*/
+			       
+			       
+SearchTree Iterative_Delete(int X,SearchTree T)	
+{
+	Position searchNode;
+	Position parentNode;
+	
+	searchNode = T;
+	parentNode = T;
+	
+	while(searchNode->value != X)
+	{
+		parentNode = searchNode;
+		
+		if(searchNode->left == NULL && searchNode->right == NULL)
+		{
+			printf("The Delete Function Excecute!");
+			return T;
+		}			
+		
+		if(X < searchNode->value)
+			searchNode = searchNode->left;
+		else if(X > searchNode->value)
+			searchNode = searchNode->right;
+		else
+			break;
+	}
+	
+	if(searchNode->left == NULL && searchNode->right == NULL)
+	{
+		if(T->left == NULL && T->right == NULL)
+		{
+			free(T);
+			T = NULL;
+		}
+		else
+		{
+			if(searchNode->value < parentNode->value)
+				parentNode->left = NULL
+			else
+				parentNode->right = NULL;
+			
+			free(searchNode);
+		}	
+	}
+	
+	else if(searchNode->left != NULL && searchNode->right == NULL)
+	{
+		if(searchNode->value < parentNode->value)
+			parentNode->left = searchNode->left;
+		else
+			parentNode->right = searchNode->left;
+		
+		free(searchNode);
+	}
+	
+	else if(searchNode->left ==NULL && searchNode->right != NULL)
+	{
+		if(searchNode->value < parentNode->value)
+			parentNode->left = searchNode->right;
+		else
+			parentNode->right = searchNode->right;
+		
+		free(searchNode);
+	}
+	
+	else if(searchNode->left != NULL && searchNode->right != NULL)
+	{
+		
+	}
+}			      
