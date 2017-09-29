@@ -92,14 +92,20 @@ void Push(Position X,pStack S)
 	//如果栈已满，则再增加5个元素空间
 	if((S->top - S->base) >= S->size)
 	{
-		S->base = (Position* )realloc(S->base,sizeof(Position )*(S->size + STACK_INCREASE));
-		if(!S->base)
+		//该变量用于存放重新分配地址空间的
+		Position *newBase;
+		
+		newBase = (Position* )realloc(S->base,sizeof(Position )*(S->size + STACK_INCREASE));
+		if(!newBase)
 		{
 			printf("ERROR!");
 			exit(1);
 		}
-	S->top = S->base + S->size;
-	S->size += STACK_INCREASE;
+		//将新地址重新赋给栈底
+		S->base = newBase;
+		
+		S->top = S->base + S->size;
+		S->size += STACK_INCREASE;
 	}
 	//入栈
 	*(S->top) = X;
