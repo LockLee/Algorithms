@@ -4,6 +4,7 @@
  *AUTHOR:LS
  *UPDATE:2016.10.29
  *UPDATE:2017.9.27 ADD COMMENTS
+ *UPDATE:2017.9.29 REWRITE DETELE() FUNCTION
  */
 
 #include <stdio.h>
@@ -210,6 +211,7 @@ SearchTree Insert(int X,SearchTree T)
 	//在右子树中递归插入
 	else if(X > T->value)					
 		T->Right = Insert(X,T->Right);	
+	//否则元素X已经在树中，我们将什么也不做
 	//在递归中返回插入节点的位置，最后返回该树
 	//这一行很重要，不能漏写
 	return T;						
@@ -289,7 +291,7 @@ SearchTree Delete(int X,SearchTree T)
 	//在右子树中递归删除
 	else if(X > T->value )					
 		T->Right = Delete(X,T->Right);
-	//如果待删节点左，右子树都不为空，则用该节点的后继替换该节点
+	//如果待删节点左，右子树都不为空，则用该节点的后继节点即右子树的最小节点替换该节点
 	else if(T->Left && T->Right)				
 	{
 		//找到该节点的后继节点
@@ -315,6 +317,8 @@ SearchTree Delete(int X,SearchTree T)
 	return T;						
 }
 
+			       
+/*****
 /*
  *在二叉搜索树T中非递归删除值X
  *
@@ -395,4 +399,4 @@ SearchTree Delete(int X,SearchTree T)
 
 	return T;
 }
-
+*****/
