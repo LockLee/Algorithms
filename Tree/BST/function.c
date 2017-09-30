@@ -405,8 +405,8 @@ SearchTree Delete(int X,SearchTree T)
 			       
 SearchTree Iterative_Delete(int X,SearchTree T)	
 {
-	Position searchNode;
-	Position parentNode;
+	Position searchNode, parentNode;
+	Position nextNode, nextParentNode;
 	
 	searchNode = T;
 	parentNode = T;
@@ -469,6 +469,24 @@ SearchTree Iterative_Delete(int X,SearchTree T)
 	
 	else if(searchNode->left != NULL && searchNode->right != NULL)
 	{
+		nextParentNode = searchNode;
+		nextNode = searchNode->right;
 		
+		while(nextNode->left != NULL)
+		{
+			nextParentNode = nextNode;
+			nextNode = nextNode->left;
+		}
+		
+		if(nextNode->value < nextParentNode->value)
+			nextParentNode->left = nextNode->right;
+		else
+			nextParentNode->right = nextNode->right;
+		
+		searchNode->value = nextNode->value;
+		
+		free(nextNode);
 	}
+	
+	return T;
 }			      
