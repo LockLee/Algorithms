@@ -411,10 +411,12 @@ SearchTree Iterative_Delete(int X,SearchTree T)
         searchNode = T;
         parentNode = T;
 
+	//先找到要删除节点位置
         while(searchNode->value != X)
         {
                 parentNode = searchNode;
-
+		
+		//已经是叶子节点，但是还没有找到该值，表示该树中并没有要删除的节点
                 if(searchNode->Left == NULL && searchNode->Right == NULL)
                 {
                         printf("The Delete Function Excecute!");
@@ -429,8 +431,10 @@ SearchTree Iterative_Delete(int X,SearchTree T)
                         break;
         }
 
+	//已经找到该节点，且该节点是叶子节点
         if(searchNode->Left == NULL && searchNode->Right == NULL)
         {
+		//要删除节点是根节点
                 if(T->Left == NULL && T->Right == NULL)
                 {
                         free(T);
@@ -438,6 +442,8 @@ SearchTree Iterative_Delete(int X,SearchTree T)
                 }
                 else
                 {
+			//要删除节点不是根节点，是普通叶子节点
+			//需要判断要删除节点是其父节点的左子树还是右子树
                         if(searchNode->value < parentNode->value)
                                 parentNode->Left = NULL;
                         else
@@ -447,8 +453,11 @@ SearchTree Iterative_Delete(int X,SearchTree T)
                 }
 	}
 
+	//已经找到该节点，且该节点的左子树非空，右子树为空
         else if(searchNode->Left != NULL && searchNode->Right == NULL)
         {
+		//需要判断要删除节点是其父节点的左子树还是右子树
+		//然后将要删除节点的父节点指向其左子树
                 if(searchNode->value < parentNode->value)
                         parentNode->Left = searchNode->Left;
                 else
@@ -457,6 +466,7 @@ SearchTree Iterative_Delete(int X,SearchTree T)
                 free(searchNode);
         }
 
+	//类似以上
         else if(searchNode->Left ==NULL && searchNode->Right != NULL)
         {
                 if(searchNode->value < parentNode->value)
@@ -467,27 +477,36 @@ SearchTree Iterative_Delete(int X,SearchTree T)
                 free(searchNode);
         }
 
+	//要删除节点的左右子树都不为空
+	//需要找到其后继节点，用后继节点替换要删除的节点
+	//然后删除后继节点
         else if(searchNode->Left != NULL && searchNode->Right != NULL)
         {
                 nextParentNode = searchNode;
                 nextNode = searchNode->Right;
 
+		//找到要删除节点的后继节点，nextParentNode指向要删除节点的后继节点的父节点
                 while(nextNode->Left != NULL)
                 {
                         nextParentNode = nextNode;
                         nextNode = nextNode->Left;
                 }
 
+		//用后继节点替换要删除的节点
                 searchNode->value = nextNode->value;
 
+		//判断后继节点是其父节点的左子树还是右子树
+		//然后将后继节点的右子树赋给其父节点的左子树或者右子树
                 if(nextNode->value < nextParentNode->value)
                         nextParentNode->Left = nextNode->Right;
                 else
                         nextParentNode->Right = nextNode->Right;
 
+		//释放后继节点
                 free(nextNode);
         }
 
+	//返回二叉搜索树
         return T;
 }
 
