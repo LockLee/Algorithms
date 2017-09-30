@@ -239,7 +239,7 @@ SearchTree Iterative_Insert(int X,SearchTree T)
 	else
 	{
 		x->value = X;
-		x-Left = T->Right = NULL;
+		x-Left = x->Right = NULL;
 	}
 
 	
@@ -403,90 +403,91 @@ SearchTree Delete(int X,SearchTree T)
 */
 			       
 			       
-SearchTree Iterative_Delete(int X,SearchTree T)	
+SearchTree Iterative_Delete(int X,SearchTree T)
 {
-	Position searchNode, parentNode;
-	Position nextNode, nextParentNode;
-	
-	searchNode = T;
-	parentNode = T;
-	
-	while(searchNode->value != X)
-	{
-		parentNode = searchNode;
-		
-		if(searchNode->left == NULL && searchNode->right == NULL)
-		{
-			printf("The Delete Function Excecute!");
-			return T;
-		}			
-		
-		if(X < searchNode->value)
-			searchNode = searchNode->left;
-		else if(X > searchNode->value)
-			searchNode = searchNode->right;
-		else
-			break;
+        Position searchNode, parentNode;
+        Position nextNode, nextParentNode;
+
+        searchNode = T;
+        parentNode = T;
+
+        while(searchNode->value != X)
+        {
+                parentNode = searchNode;
+
+                if(searchNode->Left == NULL && searchNode->Right == NULL)
+                {
+                        printf("The Delete Function Excecute!");
+                        return T;
+                }
+
+                if(X < searchNode->value)
+                        searchNode = searchNode->Left;
+                else if(X > searchNode->value)
+                        searchNode = searchNode->Right;
+                else
+                        break;
+        }
+
+        if(searchNode->Left == NULL && searchNode->Right == NULL)
+        {
+                if(T->Left == NULL && T->Right == NULL)
+                {
+                        free(T);
+                        T = NULL;
+                }
+                else
+                {
+                        if(searchNode->value < parentNode->value)
+                                parentNode->Left = NULL;
+                        else
+                                parentNode->Right = NULL;
+
+                        free(searchNode);
+                }
 	}
-	
-	if(searchNode->left == NULL && searchNode->right == NULL)
-	{
-		if(T->left == NULL && T->right == NULL)
-		{
-			free(T);
-			T = NULL;
-		}
-		else
-		{
-			if(searchNode->value < parentNode->value)
-				parentNode->left = NULL
-			else
-				parentNode->right = NULL;
-			
-			free(searchNode);
-		}	
-	}
-	
-	else if(searchNode->left != NULL && searchNode->right == NULL)
-	{
-		if(searchNode->value < parentNode->value)
-			parentNode->left = searchNode->left;
-		else
-			parentNode->right = searchNode->left;
-		
-		free(searchNode);
-	}
-	
-	else if(searchNode->left ==NULL && searchNode->right != NULL)
-	{
-		if(searchNode->value < parentNode->value)
-			parentNode->left = searchNode->right;
-		else
-			parentNode->right = searchNode->right;
-		
-		free(searchNode);
-	}
-	
-	else if(searchNode->left != NULL && searchNode->right != NULL)
-	{
-		nextParentNode = searchNode;
-		nextNode = searchNode->right;
-		
-		while(nextNode->left != NULL)
-		{
-			nextParentNode = nextNode;
-			nextNode = nextNode->left;
-		}
-		
-		searchNode->value = nextNode->value;
-		
-		if(nextNode->value < nextParentNode->value)
-			nextParentNode->left = nextNode->right;
-		else
-			nextParentNode->right = nextNode->right;
-		
-		free(nextNode);
-	}
-	
-	return T;
-}			      
+
+        else if(searchNode->Left != NULL && searchNode->Right == NULL)
+        {
+                if(searchNode->value < parentNode->value)
+                        parentNode->Left = searchNode->Left;
+                else
+                        parentNode->Right = searchNode->Left;
+
+                free(searchNode);
+        }
+
+        else if(searchNode->Left ==NULL && searchNode->Right != NULL)
+        {
+                if(searchNode->value < parentNode->value)
+                        parentNode->Left = searchNode->Right;
+                else
+                        parentNode->Right = searchNode->Right;
+
+                free(searchNode);
+        }
+
+        else if(searchNode->Left != NULL && searchNode->Right != NULL)
+        {
+                nextParentNode = searchNode;
+                nextNode = searchNode->Right;
+
+                while(nextNode->Left != NULL)
+                {
+                        nextParentNode = nextNode;
+                        nextNode = nextNode->Left;
+                }
+
+                searchNode->value = nextNode->value;
+
+                if(nextNode->value < nextParentNode->value)
+                        nextParentNode->Left = nextNode->Right;
+                else
+                        nextParentNode->Right = nextNode->Right;
+
+                free(nextNode);
+        }
+
+        return T;
+}
+
