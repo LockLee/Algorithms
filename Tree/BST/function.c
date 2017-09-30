@@ -478,12 +478,12 @@ SearchTree Iterative_Delete(int X,SearchTree T)
 			nextNode = nextNode->left;
 		}
 		
+		searchNode->value = nextNode->value;
+		
 		if(nextNode->value < nextParentNode->value)
 			nextParentNode->left = nextNode->right;
 		else
 			nextParentNode->right = nextNode->right;
-		
-		searchNode->value = nextNode->value;
 		
 		free(nextNode);
 	}
