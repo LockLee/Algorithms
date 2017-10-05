@@ -106,3 +106,21 @@ Position FindMax(AvlTree T)
 	else
 		return FindMax(T->Right);
 }
+
+/*
+ *打印AVL树信息
+ */
+void Print_avltree(AvlTree tree, int Value, int direction)
+{
+    if(tree != NULL)
+    {
+        if(direction==0)    // tree是根节点
+            printf("%2d is root\n", tree->Value, Value);
+        else                // tree是分支节点
+            printf("%2d is %2d's %6s child\n", tree->Value, Value, direction==1?"right" : "left");
+
+        print_avltree(tree->Left, tree->Value, -1);
+        print_avltree(tree->Right,tree->Value,  1);
+    }
+}
+
