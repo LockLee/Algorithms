@@ -8,6 +8,15 @@ typedef struct AVLNode Node;
 typedef struct AVLNode *Position;
 typedef struct AVLNode *AvlTree;
 
+//AVL数据结构
+struct AVLNode
+{
+	int Value;
+	AvlTree Left;
+	AvlTree Right;
+	int Height;
+};
+
 //前序遍历AVL树
 void Preorder(AvlTree );
 
@@ -32,13 +41,10 @@ AvlTree Insert(int ,AvlTree );
 //在AVL树中删除元素
 AvlTree Delete(int ,AvlTree);
 
-//AVL数据结构
-struct AVLNode
-{
-	int Value;
-	AvlTree Left;
-	AvlTree Right;
-	int Height;
-};
+//打印AVL树信息
+void Print_avltree(AvlTree tree, int key, int direction);
+
+
+
 
 #endif
