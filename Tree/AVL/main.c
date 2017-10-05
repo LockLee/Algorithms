@@ -32,7 +32,8 @@ struct AVLNode
 
 int main()
 {
-	AvlTree T;
+	AvlTree T;  
+	T = NULL;
 	int i, n;
         n = 0;
         printf("Please input the TreeNode numbers:");
