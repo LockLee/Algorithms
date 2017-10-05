@@ -87,7 +87,7 @@ static Position SingleRotateWithLeft(Position K2)
 static Position DoubleRotateLeftAndRight( Position K3)                  //左右双旋转，也就是在左子树的右子树中插入新节点
 {
         K3->Left = SingleRotateWithLeft( K3->Left );
-        return SingleRotateWithLeft( K3 );
+        return SingleRotateWithRight( K3 );
 }
 
 /*
@@ -100,7 +100,7 @@ static Position DoubleRotateLeftAndRight( Position K3)                  //左右
 static Position DoubleRotateRightAndLeft( Position K3)                  //右左双旋转
 {
         K3->Right = SingleRotateWithRight( K3->Right);
-        return SingleRotateWithRight( K3 );
+        return SingleRotateWithLeft( K3 );
 }
 
 /*
