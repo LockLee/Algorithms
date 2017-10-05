@@ -8,51 +8,53 @@
 #include <stdlib.h>
 #include "tree.h"
 
-/*
-truct AVLNode;
-typedef struct AVLNode Node;
-typedef struct AVLNode *Position;
-typedef struct AVLNode *AvlTree;
+#define TBL_SIZE(a) ( (sizeof(a)) / (sizeof(a[0])) )
+#define HEIGHT(p)    ( (p==NULL) ? -1 : (((Node *)(p))->Height) )
 
-AvlTree MakeEmpty (AvlTree );
-Position Find(int ,AvlTree );
-Position FindMin(AvlTree );
-Position FindMax(AvlTree );
-AvlTree Insert(int ,AvlTree );
-AvlTree Delete(int ,AvlTree);
-
-struct AVLNode
+void main()
 {
-        int Value;
-        AvlTree Left;
-        Avltree Right;
-        int Height;
-};
-*/
 
-int main()
-{
-	AvlTree T;  
-	T = NULL;
-	int i, n;
-        n = 0;
-        printf("Please input the TreeNode numbers:");
-        scanf("%d",&n);                                         //输入数组大小
-        int A[n];
-        printf("Please input %d TreeNodes:",n);
-        for(i = 0;i < n;i++)
-        {
-                scanf("%d",&A[i]);
-        }                                                       //初始化数组
-        for(i = 0;i < n;i++)
-	{
-		T = Insert(A[i] , T);	
-	}
-	
-	printf("%d\n",sizeof(Node));
-	
-	Inorder(T);
-	
-	printf("\n");
-	return 0;
+    int i,ilen;
+    AvlTree root=NULL;
+
+    int arr[]= {3,2,1,4,5,6,7,16,15,14,13,12,11,10,8,9};
+
+
+    printf("== 高度: %d\n", HEIGHT(root));
+    printf("== 依次添加: ");
+    ilen = TBL_SIZE(arr);
+    for(i=0; i<ilen; i++)
+    {
+        printf("%d ", arr[i]);
+        root = Insert(arr[i], root);
+    }
+
+    printf("\n== 前序遍历: ");
+    Preorder(root);
+
+    printf("\n== 中序遍历: ");
+    Inorder(root);
+
+    printf("\n");
+
+    printf("== 高度: %d\n", HEIGHT(root));
+    printf("== 最小值: %d\n", FindMin(root)->Value);
+    printf("== 最大值: %d\n", FindMax(root)->Value);
+    printf("== 树的详细信息: \n");
+    print_avltree(root, root->Value, 0);
+
+
+    i = 8;
+    printf("\n== 删除根节点: %d", i);
+    root = Delete(i, root);
+
+    printf("\n== 高度: %d", HEIGHT(root));
+    printf("\n== 中序遍历: ");
+    Inorder(root);
+    printf("\n== 树的详细信息: \n");
+    print_avltree(root, root->Value, 0);
+
+
+    DestroyTree(root);
 }
+
