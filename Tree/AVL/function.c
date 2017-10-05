@@ -8,28 +8,15 @@
 #include <stdlib.h>
 #include "tree.h"
 
-/*
-struct AVLNode;
-typedef struct AVLNode Node;
-typedef struct AVLNode *Position;
-typedef struct AVLNode *AvlTree;
-
-void Inorder(AvlTree );
-AvlTree MakeEmpty (AvlTree );
-Position Find(int ,AvlTree );
-Position FindMin(AvlTree );
-Position FindMax(AvlTree );
-AvlTree Insert(int ,AvlTree );
-AvlTree Delete(int ,AvlTree);
-
-struct AVLNode
+void Preorder(AvlTree T)
 {
-        int Value;
-        AvlTree Left;
-        Avltree Right;
-        int Height;
-};
-*/
+	if(T)
+	{
+		printf("%d	",T->Value);
+		Preorder(T->Left);
+		Preorder(T->Right);
+	}
+}
 
 void Inorder(AvlTree T)
 {
@@ -42,7 +29,7 @@ void Inorder(AvlTree T)
 
 }
 
-AvlTree MakeEmpty (AvlTree T)
+void DestroyTree(AvlTree T)
 {
 	if(T)
 	{
