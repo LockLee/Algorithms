@@ -8,6 +8,13 @@
 #include <stdlib.h>
 #include "tree.h"
 
+/*
+ *递归前序遍历AVL树
+ *
+ *参数 T：AVL树
+ *
+ *前序打印输出AVL树
+ */
 void Preorder(AvlTree T)
 {
 	if(T)
@@ -18,6 +25,13 @@ void Preorder(AvlTree T)
 	}
 }
 
+/*
+ *递归中序遍历AVL树
+ *
+ *参数 T：AVL树
+ *
+ *中序打印输出AVL树
+ */
 void Inorder(AvlTree T)
 {
         if(T)
@@ -29,6 +43,12 @@ void Inorder(AvlTree T)
 
 }
 
+/*
+ *递归销毁AVL树
+ *
+ *参数 T：AVL树
+ *
+ */
 void DestroyTree(AvlTree T)
 {
 	if(T)
@@ -40,6 +60,13 @@ void DestroyTree(AvlTree T)
 	return NULL;
 }
 
+/*
+ *在AVL树中查找元素X
+ *
+ *参数 T：AVL树
+ *
+ *如果找到则返回元素X的指针，否则返回NULL
+ */
 Position Find(int X,AvlTree T)
 {
 	if(!T || X == T->Value)
@@ -50,6 +77,13 @@ Position Find(int X,AvlTree T)
 		return Find(X,T->Right);
 }
 
+/*
+ *在AVL树中找到最小元素
+ *
+ *参数 T：AVL树
+ *
+ *如果AVL树非空则返回最小元素的地址，否则返回NULL
+ */
 Position FindMin(AvlTree T)
 {
 	if(!T || !T->Left)
@@ -58,6 +92,13 @@ Position FindMin(AvlTree T)
 		return FindMin(T->Left);		
 }
 
+/*
+ *在AVL树中找到最大元素
+ *
+ *参数 T：AVL树
+ *
+ *如果AVL树非空则返回最大元素的地址，否则返回NULL
+ */
 Position FindMax(AvlTree T)
 {
 	if(!T || !T->Right)
