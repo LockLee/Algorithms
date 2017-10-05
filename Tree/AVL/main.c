@@ -44,7 +44,7 @@ void main()
     print_avltree(root, root->Value, 0);
 
 
-    i = 8;
+    i = 7;
     printf("\n== 删除根节点: %d", i);
     root = Delete(i, root);
 
