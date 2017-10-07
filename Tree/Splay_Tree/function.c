@@ -3,9 +3,15 @@
 #include <limits.h>
 #include "splay.h"
 
+//定义静态变量NullNode，只有在该文件中的函数可以使用该静态变量
 static Position NullNode = NULL;
 
-Position Initialize(void )
+/*
+ *初始化NullNode，使伸展树中所有空指针都指向NullNode
+ *
+ *返回NullNode地址
+ */
+splayTree Initialize(void )
 {
 	if(NullNode == NULL)
 	{
@@ -15,13 +21,20 @@ Position Initialize(void )
 			printf("The Space Out!");
 			exit(1);
 		}
-		
+		//使NullNode左孩子右孩子都指向自己
 		NullNode->Left = NullNode->Right = NullNode;
 	}
 	
 	return NullNode;
 }
 
+/*
+ *递归前序遍历伸展树
+ *
+ *参数 T：伸展树
+ *
+ *前序打印输出伸展树
+ */
 void Preorder(splayTree T)
 {
 	if((T != NULL) && (T != NullNode))
@@ -32,6 +45,13 @@ void Preorder(splayTree T)
 	}
 }
 
+/*
+ *递归中序遍历伸展树
+ *
+ *参数 T：伸展树
+ *
+ *中序打印输出伸展树
+ */
 void Inorder(splayTree T)
 {
 	if((T != NULL) && (T != NullNode))
@@ -42,6 +62,13 @@ void Inorder(splayTree T)
 	}
 }
 
+/*
+ *递归销毁伸展树
+ *
+ *参数 T：伸展树
+ *
+ *返回NullNode节点地址
+ */
 splayTree DestroyTree(splayTree T)
 {
 	if((T != NULL) && (T != NullNode))
@@ -54,31 +81,65 @@ splayTree DestroyTree(splayTree T)
 	return NullNode;
 }
 
+/*
+ *在伸展树中查找元素X，并展开
+ *
+ *参数 T：伸展树
+ *
+ *如果伸展树为空则返回NULL，
+ *如果找到则返回元素X的指针，
+ *如果没找到则返回X前驱节点地址
+ */
 Position Find(Type X, splayTree T)
 {
-	if(T == NULL)
+	if(T == NullNode)
 		return NULL;
 	else 
 		return Splay(X, T);
 }
 
+/*
+ *在伸展树中查找最小元素，并展开
+ *
+ *参数 T：伸展树
+ *
+ *如果伸展树为空则返回NULL，
+ *否则返回最小元素地址
+ */
 Position FindMin(splayTree T)
 {
-	if(T == NULL)
+	if(T == NullNode)
 		return NULL;
 	else 
+		//INT_MIN表示int类型最小值,在limits.h中定义
 		return Splay(INT_MIN, T);
 }
 
+/*
+ *在伸展树中查找最大元素，并展开
+ *
+ *参数 T：伸展树
+ *
+ *如果伸展树为空则返回NULL，
+ *否则返回最大元素地址
+ */
 Position FindMax(splayTree T)
 {
         if(T == NULL)
                 return NULL;
 
         else
+		//INT_MAX表示int类型最大值,在limits.h中定义
 		return Splay(INT_MAX, T);
 }
 
+/*
+ *右单旋转，向右旋转
+ *
+ *参数 K2：旋转点地址
+ *
+ *返回旋转后的节点地址
+ */
 static Position SingleRotateWithRight(Position K2)
 {
 	Position K1;
@@ -90,6 +151,13 @@ static Position SingleRotateWithRight(Position K2)
 	return K1;
 }
 
+/*
+ *左单旋转，向左旋转
+ *
+ *参数 K2：旋转点地址
+ *
+ *返回旋转后的节点地址
+ */
 static Position SingleRotateWithLeft(Position K2)
 {
 	Position K1;
@@ -101,6 +169,13 @@ static Position SingleRotateWithLeft(Position K2)
 	return K1;
 }
 
+/*
+ * 
+ * 
+ *
+ *
+ *
+ */
 splayTree Splay(Type X, Position P)
 {
 	static struct splayNode header;
@@ -219,7 +294,9 @@ splayTree Delete(Type X, splayTree T)
 	return T;
 }
 
-
+/*
+ *打印伸展树信息
+ */
 void PrintSplay(splayTree tree, Type Value, int direction)
 {
 	if((tree != NULL) && (tree != NullNode))
