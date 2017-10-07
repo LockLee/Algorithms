@@ -265,10 +265,19 @@ splayTree Splay(Type X, Position P)
 	return P;
 }
 
+/*
+ *在伸展树 T 中插入值 X
+ *
+ *参数 X：待插入值
+ *     T：伸展树
+ *
+ *返回新伸展树地址
+ */
 splayTree Insert(Type X, splayTree T)
 {
 	static Position NewNode = NULL;
 	
+	//分配新节点
 	if(NewNode == NULL)
 	{
 		NewNode = (Position )malloc(sizeof(struct splayNode));
@@ -280,14 +289,20 @@ splayTree Insert(Type X, splayTree T)
 	}
 	NewNode->Value = X;
 
+	//伸展树为空
 	if(T == NullNode)
 	{
 		NewNode->Left = NewNode->Right = NullNode;
 		T = NewNode;
 	}
+	//伸展树 T 不为空
 	else
 	{
+		//将伸展树在值 X 处展开
 		T = Splay(X, T);
+		//如果待插入值 X 小于在值 X 处展开后的根节点值
+		//那么 T 的新根和它的右子树变成新节点的右子树
+		// T 的左子树则成为新节点的左子树
 		if(X < T->Value)
 		{
 			NewNode->Left = T->Left;
@@ -295,6 +310,7 @@ splayTree Insert(Type X, splayTree T)
 			T->Left = NullNode;
 			T = NewNode;
 		}
+		//类似以上
 		else if(X > T->Value)
 		{
 			NewNode->Right = T->Right;
@@ -302,15 +318,24 @@ splayTree Insert(Type X, splayTree T)
 			T->Right = NullNode;
 			T = NewNode;
 		}
+		//说明待插入值已在伸展树中
 		else
 			return T;
 	}
-
+	//清空，以备下次插入
 	NewNode = NULL;
 	
 	return T;
 }
 
+/*
+ *在伸展树中删除值 X
+ *
+ *参数 X：待删除值
+ *     T：伸展树
+ *
+ *返回新的伸展树地址
+ */
 splayTree Delete(Type X, splayTree T)
 {
 	Position NewTree;
@@ -318,22 +343,25 @@ splayTree Delete(Type X, splayTree T)
 	if( T != NullNode)
 	{
 		T = Splay(X, T);
+		//说明找到待删除值 X
 		if(X == T->Value)
 		{
+			//左子树为空，说明待删除值为伸展树中最小值
 			if(T->Left == NullNode)
 				NewTree = T->Right;
+			//将待删除值得前驱节点设为根节点
 			else
 			{
 				NewTree = T->Left;
 				NewTree = Splay(X, NewTree);
 				NewTree->Right = T->Right;
 			}
-	
+			//释放节点
 			free(T);
+			//设置伸展树新根
 			T = NewTree;
 		}
 	}
-
 	return T;
 }
 
