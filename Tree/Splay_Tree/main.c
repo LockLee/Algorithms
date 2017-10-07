@@ -1,3 +1,9 @@
+/*
+ *Name: Splay_Tree
+ *Time: 2017.10.7
+ *Author: LS
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -9,7 +15,8 @@ static int arr[]= {16,18,13,15,24,20,30,5,25,12};
 
 void main()
 {
-	int i, ilen;
+	Type i; 
+	int ilen;
 	splayTree root = NULL;
 	
 	root = Initialize();
@@ -32,13 +39,19 @@ void main()
 	printf("== 树的详细信息: \n");
 	PrintSplay(root, root->Value, 0);
 
-	//i = 12;
+	i = 12;
         printf("== Delete Root:\n");
-        root = Delete(12, root);
+        root = Delete(i, root);
 
 
         printf("== 树的详细信息: \n");
         PrintSplay(root, root->Value, 0);
+	
+	printf("Find 0:\n");
+        root = Find(100, root);
+        printf("== 树的详细信息: \n");
+        PrintSplay(root, root->Value, 0);
+
 
 	root = DestroyTree(root);	
 }
