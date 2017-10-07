@@ -170,55 +170,98 @@ static Position SingleRotateWithLeft(Position K2)
 }
 
 /*
+ * 自顶向下伸展过程，并返回根节点
  * 
- * 
+ *  注意：
+ *   (a)：伸展树中存在"键值为 X 的节点"。
+ *          将"键值为 X 的节点"伸展为根节点。
+ *   (b)：伸展树中不存在"键值为 X 的节点"，并且 X < root->Value。
+ *      b-1 "键值为 X 的节点"的前驱节点存在的话，将"键值为 X 的节点"的前驱节点伸展为根节点。
+ *      b-2 "键值为 X 的节点"的前驱节点不存在的话，则意味着，X 比树中任何键值都小，那么此时，将最小节点旋转为根节点。
+ *   (c)：伸展树中不存在"键值为 X 的节点"，并且key > tree->key。
+ *      c-1 "键值为 X 的节点"的后继节点存在的话，将"键值为 X 的节点"的后继节点旋转为根节点。
+ *      c-2 "键值为 X 的节点"的后继节点不存在的话，则意味着，X 比树中任何键值都大，那么此时，将最大节点旋转为根节点。
  *
- *
- *
+ *  伸展过程大致分为三个过程，左连接、右连接和集成。
+ *  在访问的任意时刻，都有一个当前节点 P ，它是其子树的根；
+ *  树 header.Left 存储树 T 中小于 P 的节点，但不存储 P 的子树中的节点
+ *  树 header.Right 存储树 T 中大于 P 的节点，但不存储 P 的子树中的节点
+ *    第一个过程：左连接
+ *           将小于当前节点并且不是当前节点子树中的节点左连接到 header.Left 中
+ *    第二个过程：右连接
+ *           将大于当前节点并且不是当前节点子树中的节点右连接到 header.Right 中
+ *    第三个过程：集成
+ *           将当前节点和 header.Left、header.Right 中子树集成为一颗伸展树
  */
 splayTree Splay(Type X, Position P)
 {
+	//定义一个头节点，其左、右子树分别存储树 L 和树 R
 	static struct splayNode header;
+	//跟踪左、右连接指针
 	Position leftMax, rightMin;
 	
-	//NullNode = Initialize();
-
+	//初始化树 L 和树 R都为 NullNode
 	header.Left = header.Right = NullNode;
+	//初始化左、右连接指针指向头结点
 	leftMax = rightMin = &header;
 
+	//
 	NullNode->Value = X;
 
+	//如果待展开值不等于当前节点值
 	while(X != P->Value)
 	{
+		//如果待展开值小于当前节点值
 		if(X < P->Value)
 		{
+			//并且小于当前节点左孩子的值，
+			//则这种情况属于 “一字形”，进行右旋转
+			//然后进行右连接
 			if(X < P->Left->Value)
-				P = SingleRotateWithRight( P );		
+				P = SingleRotateWithRight( P );
+			//如果当前节点左孩子为空
+			//则说明没有找到待展开值，退出循环
+			//否则这种情况属于“之字形”，进行简化的自顶向下的之字形旋转
+			//然后进行右连接
 			if(P->Left == NullNode)
 				break;
 	
+			//进行右连接
+			//将当前节点及其子树右连接到树 R 中
 			rightMin->Left = P;
 			rightMin = P;
+			//当前节点更换为P的左孩子
 			P = P->Left;
 		}
+		//如果待展开值大于当前节点值
 		else
 		{
+			//并且大于当前节点右孩子的值，
+			//则这种情况属于 “一字形”，进行左旋转
+			//然后进行左连接
 			if(X > P->Right->Value)
 				P = SingleRotateWithLeft( P );
+			//如果当前节点右孩子为空
+			//则说明没有找到待展开值，退出循环
+			//否则这种情况属于“之字形”，进行简化的自顶向下的之字形旋转
+			//然后进行左连接
 			if(P->Right == NullNode)
 				break;
 			
+			//进行右连接
+			//将当前节点及其子树右连接到树 R 中
 			leftMax->Right = P;
 			leftMax = P;
+			//当前节点更换为P的右孩子
 			P = P->Right; 
 		}
 	}
-	
+	//将树 L 和树 R 分别赋给当前节点的左孩子、右孩子
 	leftMax->Right = P->Left;
 	rightMin->Left = P->Right;
 	P->Left = header.Right;
 	P->Right = header.Left;
-
+	//返回树根节点
 	return P;
 }
 
