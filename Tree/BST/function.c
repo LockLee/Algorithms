@@ -143,7 +143,7 @@ Position FindMin(SearchTree T)
  *
  *如果查找成功则返回最小值元素指针，否则返回NULL
  */
-Position Iterative_FindMin(int X,SearchTree T)		
+Position Iterative_FindMin(SearchTree T)		
 {
 	//迭代循环寻找该树的最左节点
 	while(T && T->Left)	
