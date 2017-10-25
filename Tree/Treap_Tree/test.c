@@ -1,3 +1,9 @@
+/*
+ *Name: Treap_Tree
+ *Author: LS
+ *Time: 2017.10.25
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
