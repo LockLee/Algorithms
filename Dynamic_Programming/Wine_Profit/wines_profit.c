@@ -26,11 +26,22 @@ be to sell the wines in the order p1, p4, p3, p2 for a total profit 1 * 1 + 3 * 
 #include <stdio.h>
 #include <stdlib.h>
 
+//用于存放最大利润，从m[1][1]开始
 int m[10][10] = {0};
+//用于存放出售策略，从s[1][1]开始
 int s[10][10] = {0};
 
 #define max(a, b) (a>b) ? a : b
 
+/*
+ *求最大利润函数
+ *
+ *参数p[]: 表示每瓶酒的售价，从p[0]开始，p[0]表示第一瓶酒的售价
+ *     n:  表示共有 n 瓶酒
+ *
+ *m[i][j]表示 Pi 到 Pj 瓶酒的最大利润
+ *s[i][i]表示 Pi 到 Pj 瓶酒当前应出售的酒编号
+ */
 void Wines_Profit(int p[], int n)
 {
 	int i, j, L, k;
@@ -63,6 +74,16 @@ void Wines_Profit(int p[], int n)
 	}
 }
 
+/*
+ *打印输出最大利润方案
+ *
+ *参数   p[]: 表示每瓶酒的售价，从p[0]开始，p[0]表示第一瓶酒的售价
+ *     m[][]: 表示 Pi 到 Pj 瓶酒的最大利润
+ *     s[][]: 表示 Pi 到 Pj 瓶酒当前应出售的酒编号
+ *	   i: 表示从第 i 瓶酒开始
+ *         j：表示到第 j 瓶酒结束 
+ *
+ */
 void Print_Optimal_Profit(int p[], int m[][10], int s[][10], int i, int j)
 {	
 	int tmp = s[i][j];
