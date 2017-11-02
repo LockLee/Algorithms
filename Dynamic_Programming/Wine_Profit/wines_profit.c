@@ -23,6 +23,12 @@ be to sell the wines in the order p1, p4, p3, p2 for a total profit 1 * 1 + 3 * 
 
 */
 
+/*
+ *Name: Wine Profit of Dynamic Programming Solution
+ *Author：LS
+ *Time：2017.11.2
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
