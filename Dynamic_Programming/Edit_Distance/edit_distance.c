@@ -1,3 +1,13 @@
+/*
+给定 2 个字符串 a, b. 编辑距离是将 a 转换为 b 的最少操作次数，操作只允许如下 3 种：
+
+  1. 插入一个字符，例如：fj -> fxj 
+  2. 删除一个字符，例如：fxj -> fj
+  3. 替换一个字符，例如：jxj -> fyj
+
+动态规划解法：时间复杂度O(mn),空间复杂度O(m)
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
