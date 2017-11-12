@@ -1,3 +1,22 @@
+/*
+In the longest-common-subsequence problem, 
+we are given two sequences X = {x1; x2; . . . ; xm} and Y = {y1; y2; . . . ; yn} 
+and wish to find a maximumlength common subsequence of X and Y .
+
+1. Optimal substructure of an LCS:
+	Let X = {x1; x2; . . . ; xm} and Y = {y1; y2; . . . ; yn} be sequences, and let Z =
+	{z1; z2; . . . ; zk} be any LCS of X and Y .
+	1. If xm = yn, then zk = xm = yn and Zk-1 is an LCS of Xm=1 and Yn-1.
+	2. If xm != yn, then zk != xm implies that Z is an LCS of Xm-1 and Y .
+	3. If xm != yn, then zk != yn implies that Z is an LCS of X and Yn-1.
+
+2. Overlapping Subproblems Property:
+		  0                        if i = 0 or j = 0
+	c[i, j] = c[i-1,j-1] + 1           if i,j > 0 and xi = yj  
+	          max(c[i,j-1],c[i-1,j])   if i,j > 0 and xi != yj
+		 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
