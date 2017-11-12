@@ -9,8 +9,6 @@ void LCS(char *a, char *b)
 
 	int lena = strlen(a);
 	int lenb = strlen(b);
-	//printf("%d\n",lena);
-	//printf("%d\n",lenb);
 
 	int c[lena + 1][lenb + 1];
 	
@@ -38,8 +36,6 @@ void LCS(char *a, char *b)
 	char com_string[maxlcs];
 	i = lena;
 	j = lenb;
-	//printf("%d\n",i);
-	//printf("%d\n",j);
 
 	while(maxlcs > 0)
 	{
@@ -58,7 +54,6 @@ void LCS(char *a, char *b)
 			j--;
 		}
 	}
-	//printf("Done!\n");
 	
 	maxlcs = c[lena][lenb];
 
