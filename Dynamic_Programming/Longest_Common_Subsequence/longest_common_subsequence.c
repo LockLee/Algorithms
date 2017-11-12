@@ -14,6 +14,9 @@ and wish to find a maximumlength common subsequence of X and Y .
 		  0                        if i = 0 or j = 0
 	c[i, j] = c[i-1,j-1] + 1           if i,j > 0 and xi = yj  
 	          max(c[i,j-1],c[i-1,j])   if i,j > 0 and xi != yj
+
+3. Time Cost O(mn)
+   Space Cost O(mn)
 		 
 */
 
