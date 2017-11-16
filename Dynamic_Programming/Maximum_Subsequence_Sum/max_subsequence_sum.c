@@ -28,9 +28,9 @@ void Max_Subsequence_Sum(int arr[], int length)
 	//该数组保存以当前 i 结尾的最大子序列和
 	int sumhere[length];
 
-	//在每次循环之前，maxendinghere 包含了截止于位置 i-1 的最大子序列的值，
-	//循环开始后，赋值语句修改它以包含截止与位置 i 的最大子序列和，
-	//当它变为负值时，就将它重新设为 0 （因为截止与 i 的最大子序列现在是空序列了）
+	//在每次循环之前，maxendinghere 包含了截止于位置 i-1 的最大子序列的值，也就是以位置 i-1 结尾的最大子序列和
+	//循环开始后，赋值语句修改它以包含截止于位置 i 的最大子序列和，
+	//当它变为负值时，就将它重新设为 0 （因为截止于 i 的最大子序列现在是空序列了）
 	for(i = 0; i < length; i++)
 	{
 		maxendinghere = max(maxendinghere + arr[i], 0);
