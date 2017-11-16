@@ -26,7 +26,7 @@ void Max_Subsequence_Sum(int arr[], int length)
 	int maxsofar = 0;
 	int maxendinghere = 0;
 	//该数组保存以当前 i 结尾的最大子序列和
-	int sumhere[length];
+	int maxsumhere[length];
 
 	//在每次循环之前，maxendinghere 是结束位置为 i-1 的最大子序列的和，也就是以位置 i-1 结尾的最大子序列和
 	//循环开始后，赋值语句修改它以包含截止于位置 i 的最大子序列和，
@@ -34,29 +34,29 @@ void Max_Subsequence_Sum(int arr[], int length)
 	for(i = 0; i < length; i++)
 	{
 		maxendinghere = max(maxendinghere + arr[i], 0);
-		sumhere[i] = maxendinghere;
+		maxsumhere[i] = maxendinghere;
 		maxsofar = max(maxsofar, maxendinghere);
 	}
 	
 	for(i = 0; i < length; i++)
-		printf("%d   ", sumhere[i]);
+		printf("%d   ", maxsumhere[i]);
 	
 	printf("\nMax Subsequence Sum Is: %d\n", maxsofar);
 	
 	//打印输出最大子序列和开始位置和结束位置
 	i = length-1;
-	while(sumhere[i] != maxsofar)
+	while(maxsumhere[i] != maxsofar)
 		i--;
 	right = i;
 	for(i; i >= 0; i--)
 	{
-		if(sumhere[i] == 0 || i == 0)
+		if(maxsumhere[i] == 0 || i == 0)
 		{
 			left = i;	
 			break;
 		}
 	}
-	if(sumhere[i] == 0)
+	if(maxsumhere[i] == 0)
 		left++;
 
 	printf("\nLeft Is: %d \n Right Is: %d \n", left,right);
