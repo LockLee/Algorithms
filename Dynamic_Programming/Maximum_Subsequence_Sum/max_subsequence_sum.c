@@ -1,3 +1,17 @@
+/*
+Problem:
+	Given (possibly negative) integers a1, a2, . . . , an, find the maximum value of . 
+	(For convenience, themaximum subsequence sum is 0 if all the integers are negative.)
+	Example:
+	For input -2, 11, -4, 13, -5, -2, the answer is 20 (a1 through a3).
+	
+假设我们已经解决了针对于 x[1,...,i-1] 的问题，我们如何将其扩展为包含 x[i] de 问题呢？
+我们使用类似递归思想：依次求解前 i 个元素的最大子序列和，其和如果小于 0 ，则替换为 0 (因为定义最大子序列和最小为 0 )，保存在数组 sumhere[] 中，
+也就是说数组 sumhere[0,...,i-1] 保存以下标 k(0 <= k <= i-1) 结尾的最大连续子序列和。
+
+Time Cost O(n)；Space Cost O(n).
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,8 +25,12 @@ void Max_Subsequence_Sum(int arr[], int length)
 
 	int maxsofar = 0;
 	int maxendinghere = 0;
+	//该数组保存以当前 i 结尾的最大子序列和
 	int sumhere[length];
 
+	//在每次循环之前，maxendinghere 包含了截止与位置 i-1 的最大子序列的值，
+	//循环开始后，赋值语句修改它以包含截止与位置 i 的最大子序列和，
+	//当它变为负值时，就将它重新设为 0 （因为截止与 i 的最大子序列现在是空序列了）
 	for(i = 0; i < length; i++)
 	{
 		maxendinghere = max(maxendinghere + arr[i], 0);
@@ -24,6 +42,8 @@ void Max_Subsequence_Sum(int arr[], int length)
 		printf("%d   ", sumhere[i]);
 	
 	printf("\nMax Subsequence Sum Is: %d\n", maxsofar);
+	
+	//打印输出最大子序列和开始位置和结束位置
 	i = length-1;
 	while(sumhere[i] != maxsofar)
 		i--;
