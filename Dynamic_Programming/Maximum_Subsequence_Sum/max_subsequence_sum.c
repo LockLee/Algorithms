@@ -1,6 +1,6 @@
 /*
 Problem:
-	Given (possibly negative) integers a1, a2, . . . , an, find the maximum value of . 
+	Given (possibly negative) integers a1, a2, . . . , an, find the maximum value of subsequence sum. 
 	(For convenience, themaximum subsequence sum is 0 if all the integers are negative.)
 	Example:
 	For input -2, 11, -4, 13, -5, -2, the answer is 20 (a1 through a3).
