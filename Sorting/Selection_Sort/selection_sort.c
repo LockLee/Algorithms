@@ -1,5 +1,17 @@
+/*
+ *NAME:SELECTION-SORT(O(n^2))
+ *TIME:2017.11.21
+ *AUTHOR:LS
+ */
+
 #include<stdio.h>
 #include<stdlib.h>
+
+/*
+
+
+
+*/
 
 void selection_sort(int A[], int n)
 {
