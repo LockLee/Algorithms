@@ -8,9 +8,18 @@
 #include<stdlib.h>
 
 /*
+The best case execute O(n2) comparisons and O(n)swaps.
+The Best Case Time Cost：O(n2)
 
+The Worst case execute O(n2) comparisons and O(n)swaps.
+The Worst Case Time Cost：O(n2)
 
+The average case execute O(n2) comparisons and O(n)swaps.
+The average Case Time Cost：O(n2)
 
+The Selection Sort is Not Stability.
+
+The Selection Sort need other Memory is O(1).
 */
 
 void selection_sort(int A[], int n)
