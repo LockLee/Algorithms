@@ -17,8 +17,7 @@ Overlapping Subproblems Property:
 	c[i,j] = c[i-1,j]		          if wi > j
 		 max(c[i-1,j], c[i-1,j-wj]+vi)    if i>0 and j >= wi
 		
-Time Cost O(nW)
-Space Cost O(nW)
+
 */
 
 
@@ -32,8 +31,11 @@ int max(int a, int b)
 	else
 		return b;
 }
-
-void knapsack_0_1(int v[], int w[], int length, int W)
+/*
+ *Time Cost O(nW)
+ *Space Cost O(nW)
+ */
+void knapsack_0_1_OnW(int v[], int w[], int length, int W)
 {
 	int i, j, k;
 	int clen;
@@ -82,12 +84,37 @@ void knapsack_0_1(int v[], int w[], int length, int W)
 		}
 	}
 }
+/*
+ *0/1 动态规划空间优化
+ *时间复杂度 O(length*W) 空间复杂度 O(W)
+ */
+void knapsack_0_1_OW(int v[], int w[], int length, int W)
+{
+        int i, j, k;
+        int cLen = length + 1;
+        int fW = W + 1;
+        int f[fW];
+
+        for(j = 0; j < fW; j++)
+        {
+                f[j] = 0;
+        }
+
+	//在01背包中， j 变化的区间是逆序循环的原因：要保证由状态f[i-1][j-w[i]]递推到状态 f[i][j] 时，
+	//f[i-1][j-w[i]]表示没有放入第i件物品。之后，在第i循环时，放入一件第i件物品。
+        for(i = 1; i < cLen; i++)
+                for(j = W; j >= w[i-1]; j--)
+                        f[j] = max(f[j], f[j-w[i-1]] + v[i-1]);
+
+        printf("%d\n",f[W]);
+}
+
 	
 int main() {
 	int value[] = {60,100,120};
 	int weight[] = {10,20,30};
 	int total = 50;
 	int length = sizeof(value)/sizeof(value[0]);
-    	knapsack_0_1(value,weight,length,total);
+    	knapsack_0_1_OnW(value,weight,length,total);
 	return 0;
 }
