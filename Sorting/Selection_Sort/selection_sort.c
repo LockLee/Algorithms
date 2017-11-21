@@ -32,7 +32,7 @@ void selection_sort(int A[], int n)
 	int min;
 	int tmp;
 
-	//在数组 A[i...n-1] 中找到最小元素和 A[i-1] 交换
+	//在数组 A[i...n-1] 中找到最小元素和 A[i] 交换
 	// min 用来记录 A[i...n-1] 中的最小元素值
 	// k 用来记录 A[i...n-1] 中最小元素的下标
 	for(i = 0; i < n; i++)
