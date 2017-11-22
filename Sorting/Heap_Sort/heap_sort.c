@@ -1,9 +1,29 @@
+/*
+ *NAME:HEAP-SORT
+ *TIME:2017.11.22
+ *AUTHOR:LS
+ */
+
+/*
+The Best-case performance O(n).
+
+The Worst-case performance O(n log n).
+
+The Average performance O(n log n).
+
+The Heap Sort is Not Stability.
+
+The Worst-case space complexity O(1) auxiliary.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
+//宏定义求下标为 i 的左孩子和右孩子
 #define LEFT(i) (2*i+1)
 #define RIGHT(i) 2*(i+1)
 
+//交换两元素的值
 void swap(int *a, int *b)
 {
 	int tmp;
@@ -11,6 +31,7 @@ void swap(int *a, int *b)
 	*a = *b;
 	*b = tmp;
 }
+
 
 void max_heapify(int A[], int index, int heapsize)
 {
