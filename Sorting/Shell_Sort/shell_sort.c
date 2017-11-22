@@ -1,3 +1,22 @@
+/*
+ *NAME:SHELL-SORT
+ *TIME:2017.11.22
+ *AUTHOR:LS
+ */
+
+/*
+Best-case performance O(n log n).
+
+Worst-case performance	O(n2) (worst known gap sequence)
+O(n log2n) (best known gap sequence).
+
+Average performance depends on gap sequence.
+
+The Shell Sort is Not Stability.
+
+Worst-case space complexity О(n) total, O(1) auxiliary.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -10,6 +29,8 @@ void swap(int *a, int *b)
 	*b = tmp;
 }
 
+//Compute Hibbard's increments
+//The worst-case running time of Shellsort using Hibbard's increments is (n3/2).
 int Hibbard(int n)
 {
 	int i = 0;
@@ -27,8 +48,10 @@ void shell_sort(int A[], int n)
 	
 	increment = Hibbard(n);
 	
+	//计算增量
 	for(; increment > 0; increment /= 2)
 	{
+		////根据当前增量进行组内插入排序
 		for(i = increment; i < n; i++)
 		{
 			tmp = A[i];
