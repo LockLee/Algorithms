@@ -32,11 +32,13 @@ void swap(int *a, int *b)
 	*b = tmp;
 }
 
-
+//在小标为 index 处调整堆，维护堆序性质
+//假设 index 左右孩子都满足堆序性质
 void max_heapify(int A[], int index, int heapsize)
 {
 	int iMax, iLeft, iRight;
 	
+	//iMax 用于保存下标为 index 及其左、右孩子三者最大值
 	while(1)
 	{
 		iMax = index;
@@ -48,6 +50,9 @@ void max_heapify(int A[], int index, int heapsize)
 		if(iRight < heapsize && A[iRight] > A[iMax])
 			iMax = iRight;
 		
+		//如果 iMax != index ,说明 index 左孩子或者右孩子大于 以 index 为下标的值,
+		//违反堆序性质，需要交换调整.
+		//否则说明该子树已经满足堆序性质，退出循环
 		if(iMax != index)
 		{
 			swap(&A[iMax], &A[index]);
@@ -58,13 +63,19 @@ void max_heapify(int A[], int index, int heapsize)
 	}
 }
 
+//构建大根堆
 void build_max_heap(int A[], int heapsize)
 {
 	int i;
+	//从第一个非叶子节点开始，调整数组结构使之满足堆序性质
 	for(i = (heapsize-1)/2; i >=0; i--)
 		max_heapify(A, i, heapsize);
 }
 
+//将初始待排序关键字序列(A0,A1,A2,...,An-1)构建成大根堆，此堆为初始的无序区，堆大小为数组大小 n；
+//将堆顶元素 A[0] 与最后一个元素 A[n-1] 交换，此时得到新的无序区(A1,A2,......An-2)
+//和新的有序区(An-1),且满足 A[0,1,2...n-1] <= A[n-1]，并将堆大小减 1；
+//在 A[0] 处维护堆序性质，再交换 A[0] 和 A[n-2]，重复此过程直至堆大小为 1；
 void heap_sort(int A[], int length)
 {
 	int i,k;
