@@ -46,9 +46,10 @@ void shell_sort(int A[], int n)
 	int increment;
 	int tmp;
 	
+	//计算增量
 	increment = Hibbard(n);
 	
-	//计算增量
+	//缩小增量
 	for(; increment > 0; increment /= 2)
 	{
 		////根据当前增量进行组内插入排序
