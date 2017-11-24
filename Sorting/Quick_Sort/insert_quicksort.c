@@ -1,3 +1,9 @@
+/*
+ *NAME: CUTOFF TO INSERTION SORT OF QUICKSORT
+ *TIME: 2017.11.24
+ *AUTHOR: LS
+ */ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -17,14 +23,18 @@ int main()
 	n = 2000000;
 	int A[n];
 
+	//随机产生 n 个整数
 	rand_seq3(A, n);
                    
+	//在本机上 k = 9 时最快
 	k = 9;             
 
+	//计算快速排序时间
 	c_start = clock();
         rand_quicksort(A,0,n-1,k);                 		
 	c_end = clock();
 
+	//打印输出排序时间
 	printf("The pause used %f s by clock()\n",(double)(c_end,c_start)/CLOCKS_PER_SEC);
 
 	return 0;
@@ -42,13 +52,13 @@ int rand_partition(int *A, int p,int r)
 	
 	swap(&A[r], &A[randi]);
 	
-	pivot = A[r];						//选取数组最后一个元素作为主元
-	for(j = p;j < r;j++)					//遍历数组
+	pivot = A[r];						
+	for(j = p;j < r;j++)					
 	{
 		if(A[j] <= pivot)
 		{
 			i++;
-			swap(&A[i], &A[j]);			//交换函数
+			swap(&A[i], &A[j]);			
 		}	
 	}
 	swap(&A[r], &A[i+1]);
@@ -56,15 +66,15 @@ int rand_partition(int *A, int p,int r)
 }
 
 
-void rand_quicksort(int *A, int p, int r, int k)		//quicksort()函数实现对数组的递归排序
+void rand_quicksort(int *A, int p, int r, int k)		
 {	
 	int q;
 	if(r < p + k)
 		insertion_sort(A,p,r);
 	else
 	{
-		q = rand_partition(A,p,r);			//q 为主元位置
-		rand_quicksort(A,p,q-1,k);			//递归调用quicksort()函数
+		q = rand_partition(A,p,r);			
+		rand_quicksort(A,p,q-1,k);			
 		rand_quicksort(A,q+1,r,k);	
 	}
 }
