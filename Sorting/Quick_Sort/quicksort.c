@@ -14,7 +14,7 @@ The Average performance O(nlogn).
 
 The Merge Sort is Not Stability.
 
-The Worst case space complexity is O(n) auxiliary; O(log n) on average auxiliary.
+The Worst case space complexity is O(n) auxiliary; O(log n) auxiliary on average.
 */
 #include <stdio.h>
 
