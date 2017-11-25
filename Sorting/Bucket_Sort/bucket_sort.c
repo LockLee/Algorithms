@@ -41,12 +41,14 @@ void bucket_sort(int A[], int n, int maxn);
 int main()
 {
 	int i, j;
+	//定义待排序数组大小
 	int N = 100;
+	//定义待排序数组元素最大值
 	int MaxN = 1000;
 	
 	int A[N];
-	
 
+	//随机生成 N 个数
 	srand((unsigned)time(NULL));
 	for(i = 0; i < N; i++)
 		A[i] = rand()%(MaxN+1);
