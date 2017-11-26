@@ -17,12 +17,13 @@ The Worst case space complexity is O(n + k) auxiliary.
 #include<stdlib.h>
 #include<time.h>
 
-//
+//定义10个桶
 #define RADIX_10 10
 //unsigned int 类型表示数范围为0-4294967295，最多是十位数字
 #define KEYNUM_31 10						
 
-int randInt(int N)						//随机生成[0:N-1]之间的整数
+//随机生成[0:N-1]之间的整数
+int randInt(int N)						
 {
         int randNum;
 
@@ -33,7 +34,8 @@ int randInt(int N)						//随机生成[0:N-1]之间的整数
 
 }
 
-void swap(int *a, int *b)					//交换*a和*b的值
+//交换*a和*b的值
+void swap(int *a, int *b)					
 {
         int temp;
         temp = *a;
@@ -41,20 +43,24 @@ void swap(int *a, int *b)					//交换*a和*b的值
         *b = temp;
 }
 
-int rand_seq3(int A[], int N)					//生成N个[0:N-1]之间的整数，存在数组A中
+//生成N个[0:N-1]之间的整数，存在数组A中
+int rand_seq3(int A[], int N)					
 {
         int i,j;
 
-        for(i=0; i<N; i++)					//初始化数组A，使A[i]=i
+	//初始化数组A，使A[i]=i
+        for(i=0; i<N; i++)					
                 A[i] = i;
 
-        for(i=1; i<N; i++)					//交换A[i]和A[randInt(i)],randInt(i)是[0:i-1]之间的随机数
+	//交换A[i]和A[randInt(i)],randInt(i)是[0:i-1]之间的随机数
+        for(i=1; i<N; i++)					
                 swap(&A[i], &A[randInt(i)]);		
 
         return 0;
 }
 
-void printArray(int A[], int N)					//打印数组A
+//打印数组A
+void printArray(int A[], int N)					
 {
 	int i;
 	for(i = 0; i < N; i++)
@@ -62,7 +68,8 @@ void printArray(int A[], int N)					//打印数组A
 	printf("\n");
 }
 
-int getNumOfPos(int num, int pos)				//返回num的第pos位数字，pos从1开始
+//返回num的第pos位数字，pos从1开始
+int getNumOfPos(int num, int pos)				
 {
 	int i;
 	int temp = 1;
@@ -72,28 +79,34 @@ int getNumOfPos(int num, int pos)				//返回num的第pos位数字，pos从1开�
 	return (num/temp)%10;
 }
 
-void radixSort(int A[], int N)					//基数排序数组A，数组长度为N
+//基数排序数组A，数组长度为N
+void radixSort(int A[], int N)					
 {
 	int i, j, k;
 	int pos, index, numOfBit;
-	int *bucket[RADIX_10];					//建立0-9之间的桶
+	//建立0-9之间的桶
+	int *bucket[RADIX_10];					
 
-	for(i = 0; i < RADIX_10; i++)				//建立基数排序桶，bucket[i][0]表示桶中数据个数，初始化为0
+	//建立基数排序桶，bucket[i][0]表示桶中数据个数，初始化为0
+	for(i = 0; i < RADIX_10; i++)				
 	{
 		bucket[i] = (int *)malloc(sizeof(int) * (N + 1));
 		bucket[i][0] = 0;
 	}
 
-	for(pos = 1; pos <= KEYNUM_31; pos++)			//基数排序核心部分，依次按数据位pos排序
+	//基数排序核心部分，依次按数据位pos排序
+	for(pos = 1; pos <= KEYNUM_31; pos++)			
 	{
-		for(i = 0; i < N; i++)				//将数组中数据依次按照pos放入相应桶中
+		//将数组中数据依次按照pos放入相应桶中
+		for(i = 0; i < N; i++)				
 		{
 			numOfBit = getNumOfPos(A[i],pos);
 			index = ++bucket[numOfBit][0];
 			bucket[numOfBit][index] = A[i];	
 		}
 
-		for(i = 0, j = 0; i < RADIX_10; i++)		//将桶中数据取出放入数组中
+		//将桶中数据取出放入数组中
+		for(i = 0, j = 0; i < RADIX_10; i++)		
 		{
 			for(k = 1; k <= bucket[i][0]; k++)
 				A[j++] = bucket[i][k];
@@ -106,10 +119,12 @@ void radixSort(int A[], int N)					//基数排序数组A，数组长度为N
 
 int main()
 {	
-	int N = 1000000;					//设置数组大小为1,000,000
+	//设置数组大小为1,000,000
+	int N = 1000000;					
 	int A[N];
 	
-	rand_seq3(A, N);					//随机生成数组A
+	//随机生成数组A
+	rand_seq3(A, N);					
 	printArray(A, N);
 	radixSort(A, N);
 	printArray(A, N);
