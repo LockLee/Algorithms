@@ -2,7 +2,7 @@
  *NAME:COUNTING SORT(O(n + k))
  *TIME:2016.10.2	
  *AUTHOR:LS
- * *UUPDATE:2017.11.26,Add some comments.
+ *UPDATE:2017.11.26,Add some comments.
  */
 
 /*
