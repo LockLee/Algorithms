@@ -1,16 +1,26 @@
 /*
- *Name:radix sort
+ *Name:RADIX SORT
  *Time: 2017.9.2
  *Author: LS
- * 
- * */
+ *UPDATE:2017.11.26,Add some comments.
+ */
+
+/*
+Radix sort complexity is O(wn) for n keys which are integers of word size w.
+
+The Radix Sort is Stability.
+
+The Worst case space complexity is O(n + k) auxiliary.
+*/
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
+//
 #define RADIX_10 10
-#define KEYNUM_31 10						//unsigned int 类型表示数范围为0-4294967295，最多是十位数字
+//unsigned int 类型表示数范围为0-4294967295，最多是十位数字
+#define KEYNUM_31 10						
 
 int randInt(int N)						//随机生成[0:N-1]之间的整数
 {
