@@ -97,6 +97,7 @@ void countingSort(int *A,int n,int k)
 	}
 	
 	//把每个元素A[j]放到B[]数组中的正确位置
+	//n-1 downto 0 保证是稳定排序
 	for(j = n-1;j >= 0;j--)					
 	{
 		//数组B[]下标从0开始，所以A[j]的正确位置是C[A[j]] - 1
