@@ -130,7 +130,8 @@ void Insert(Elemtype X, PriorityQueue H)
 		H->capacity = lastCapacity + 10;
 	}
 
-	//上滤，找到元素X正确插入位置
+	//上滤，找到元素X正确插入位置,并将堆元素个数加 1
+	//H->Elements[0]存放一个哨兵（sentinal），简化逻辑判断
 	for(i = ++H->size; H->Elements[i/2] > X; i /= 2)
 		H->Elements[i] = H->Elements[i/2];
  	//位置[i]即为元素X插入的正确位置
@@ -158,10 +159,10 @@ Elemtype DeleteMin(PriorityQueue H)
 	}
 
 	minElement = H->Elements[1];
-	//取出最后元素
+	//取出最后元素并将堆元素个数减 1
 	lastElement = H->Elements[H->size--];
 
-	//上滤，找到最后一个元素lastElement的正确插入位置
+	//下滤，找到最后一个元素lastElement的正确插入位置
 	for(i = 1; 2*i <= H->size; i = child)
 	{
 		child = i * 2;
