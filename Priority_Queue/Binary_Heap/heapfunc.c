@@ -339,6 +339,7 @@ Elemtype Delete(int P, PriorityQueue H)
 	{
 		value = H->Elements[P];
 		//将最后一个元素的值赋给优先队列位置P
+		//并将堆元素个数减 1
 		H->Elements[P] = H->Elements[H->size--];
 		//在位置P上执行下滤
 		PercolateDown(P, H);
