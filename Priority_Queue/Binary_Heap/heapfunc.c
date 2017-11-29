@@ -288,7 +288,7 @@ void swap(Elemtype *a, Elemtype *b)
 	*b = tmp;
 }
 
-//将位置P上的元素值上滤
+//将位置P上的元素值下滤
 void PercolateDown(int P, PriorityQueue H)
 {
 	int i, child;
