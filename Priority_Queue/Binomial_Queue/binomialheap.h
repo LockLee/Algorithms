@@ -5,7 +5,7 @@
 #define MaxSize 30
 
 //定义二项队列最大容量
-#define Capacity 1073741824
+#define Capacity 1073741823
 
 //自定义节点元素类型
 typedef int Elemtype;
