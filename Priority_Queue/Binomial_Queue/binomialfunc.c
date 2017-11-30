@@ -311,7 +311,7 @@ Elemtype DeleteMin(BinQueue H)
 	//找到二项队列H最小值下标
 	minIndex = FindMinIndex(H);
 	
-	//是oldTree指向最小值二项树
+	//使oldTree指向最小值二项树
 	oldTree = H->theTrees[minIndex];
 	//将最小值赋给minValue
 	minValue = oldTree->value;
@@ -336,7 +336,7 @@ Elemtype DeleteMin(BinQueue H)
 
 	H->theTrees[minIndex] = NULL;
 	//更新二项队列当前大小
-	H->currentSize -= deletedQueue->currentSize + 1;
+	H->currentSize -= (deletedQueue->currentSize + 1);
 	
 	//合并
 	Merge(H, deletedQueue);
