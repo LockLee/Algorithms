@@ -93,7 +93,7 @@ void merge(int *A,int p ,int q ,int r )
 	//合并L[],R[].并复制给A[]
 	for(k = p;k < r + 1;k++)
 	{
-		if(L[i] < R [j])
+		if(L[i] <= R [j])
 		{
 			A[k] = L[i];
 			i++;
