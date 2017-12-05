@@ -24,9 +24,11 @@
 #include <stdlib.h>
 #include <limits.h>
 
+// A define to find maximum of two and three integers
 #define max(a, b) (a) > (b) ? (a) : (b)
 #define max3(a, b, c) (max(a, b)) > (c) ? max(a, b) : (c)
 
+// Find the maximum possible sum in arr[] from left to right
 static int maxSubSum(const int A[], int left, int right)
 {
 	int i, mid;
