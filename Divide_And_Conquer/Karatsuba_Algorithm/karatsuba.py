@@ -1,8 +1,52 @@
+'''
+/*
+ *NAME:KARATSUBA-ALGORITHM(O(n^lg3))
+ *TIME:2017.12.7
+ *AUTHOR:LS
+ *REFERENCE:http://www.keithschwarz.com/interesting/code/?dir=karatsuba
+ */
+'''
+
+'''
+  An implementation of Karatsuba's algorithm for fast multiplication of
+  arbitrary-precision integers.  Given two n-bit integers, Karatsuba's method
+  can compute their product in O(n^(lg2)) time by using a clever recurrence
+  relation.  Although there exist algorithms that are asymptotically faster
+  than Karatsuba's method, Karatsuba's algorithm is easier to intuit and in
+  many ways clearer.
+
+
+For Example:
+  Suppose that we are given two numbers x and y that we wish to multiply, and 
+  that they are written out as strings in some base b. 
+ 
+  x = (x0 * b^m) + x1
+  y = (y0 * b^m) + y1
+  
+  x * y = ((x0 * b^m) + x1) * ((y0 * b^m) + y1)
+        = x0 * y0 * b^2m + ((x0 * y1) + (x1 * y0)) * b^m + x1 * y1
+	= x0 * y0 * b^2m + ((x0 + x1) * (y0 + y1) - x0 * y0 - x1 * y1) * b^m + x1 * y1
+	
+  p0 = x0 * y0
+  p1 = (x0 + x1) * (y0 + y1)
+  p2 = x1 * y1
+
+  z0 = p0
+  z1 = p1 - (p0 + p2)
+  z2 = p2
+
+So:
+  x * y = z0 * b^2m + z1 * b^m + z2
+
+'''
+
+'''
+#Adds two arbitrary-precision values in some base together.
+   
+#Given two arrays lhs and rhs of digits in some base 'base,' returns an
+#array of the number lhs + rhs encoded in base 'base.'
+'''
 def add(lhs, rhs, base):
-	"""Adds two arbitrary-precision values in some base together.
-    	
-	Given two arrays lhs and rhs of digits in some base 'base,' returns an
-	array of the number lhs + rhs encoded in base 'base.'"""
 
 	# Pad the two inputs to be the same length.
 	length = max(len(lhs), len(rhs))
@@ -35,13 +79,14 @@ def add(lhs, rhs, base):
 
 	return result
 
-
-def subtract(lhs, rhs, base):
-	"""Subtracts two arbitrary-precision values in some base.
+'''
+#Subtracts two arbitrary-precision values in some base.
     
-	Given two arrays lhs and rhs of digits in some base 'base,' returns an
-	array of the number lhs - rhs encoded in base 'base.'  It is assumed that
-	lhs >= rhs; an error occurs if this is not the case."""
+#Given two arrays lhs and rhs of digits in some base 'base,' returns an
+#array of the number lhs - rhs encoded in base 'base.'  It is assumed that
+#lhs >= rhs; an error occurs if this is not the case.
+'''
+def subtract(lhs, rhs, base):
 
 	# Pad the two inputs to be the same length.
 	length = len(lhs)
@@ -70,19 +115,19 @@ def subtract(lhs, rhs, base):
 
 	# Reverse the order of the resulting digits; that's the more proper way
 	# to hand them back.
-	#result.reverse();
 	if result[0] == 0:
 		result = result[1:]
 	
 	return result
 
+'''
+#Multiplies two arbitrary-precision values in some base.
 
+#Given two arrays of lhs and rhs of digits in some base 'base,' returns
+#an array of digits corresponding to their product using the Karatsuba
+#algorithm.
+'''
 def multiply(lhs, rhs, base):
-	"""Multiplies two arbitrary-precision values in some base.
-
-    	Given two arrays of lhs and rhs of digits in some base 'base,' returns
-    	an array of digits corresponding to their product using the Karatsuba
-    	algorithm."""
 
 	assert len(lhs) > 0 and len(rhs) > 0
 
