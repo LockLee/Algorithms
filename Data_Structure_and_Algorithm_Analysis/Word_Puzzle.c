@@ -12,7 +12,6 @@
 #define WORDLEN 4
 #define WORDHIGH 4
 #define NUMCHARS(a, b) ((a) > (b) ? (a) : (b))
-#define MIN(a, b) ((a) > (b) ? (a) : (b))
 
 
 char puzzle[WORDLEN][WORDHIGH] = {
