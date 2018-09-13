@@ -9,6 +9,8 @@
 接着，将剩下的元素再逐个读入。当新元素被读到时，如果它小于数组中的第k个元素则忽略，否则将其放到数组中正确的位置上（就是插入排序啊！），
 同时将数组中最后一个元素挤出数组。当算法终止时，位于第k个位置上的元素就是最终结果，即第k个最大的元素。 
 该算法的平均运行时间为O(N⋅k)，但是最差时间为O(N2)
+
+以下实现第二种算法：
 */
 
 #include <stdio.h>
@@ -44,14 +46,17 @@ int main(){
 	return 0;
 }
 
+//返回数组第 K 大元素
 int select(int k, int length, int nums[]){
 	int kNums[k];
 	for(int i = 0; i < k; i++){
 		kNums[i] = nums[i];
 	}
 
+	//将前K个元素进行递减排序
 	qsort(kNums, k, sizeof(int), comp);
 	
+	//将数组中后 length-k 个元素插入到数组 kNums 中
 	for(int i = k; i < length; i++){
 		int iNum = nums[i];
 		if(iNum > kNums[k-1]){
