@@ -30,10 +30,8 @@ int main(){
 	
 	printf("Please Input K: (1<=K<=%d)\n",length);
 	scanf("%d", &k);
-
-
 	
-	if(length < k){
+	if(length < k || k <= 0){
 		printf("The Input of K Error!");
 		return 0;
 	}
