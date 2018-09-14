@@ -163,8 +163,12 @@ void PercolateUp(int P, PriorityQueue H)
 	Elemtype value;
 	value = H->Elements[P];
 	
-	for(i = P; H->Elements[i/2] > value; i /= 2)
-		swap(&value, &(H->Elements[i]));
+	//执行上滤，找到新元素值的正确位置
+	for(i = P; H->Elements[i/2] > value; i /= 2 )
+		H->Elements[i] = H->Elements[i/2];
+		
+	//将新元素值放入正确位置
+	H->Elements[i] = value;
 }
 
 //交换两元素的值
