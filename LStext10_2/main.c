@@ -14,7 +14,7 @@ int main()
 	int i ,j,n;
 	ptrNode L,p,q;
 	L = (ptrNode)malloc(sizeof(Node));
-	L->next == NULL;
+	L->next = NULL;
 	for(i = 0;i < 5; i++)
 		insert(i,L,L);
 	p = L->next;
