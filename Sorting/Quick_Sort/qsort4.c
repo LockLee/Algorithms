@@ -1,4 +1,5 @@
 /* Two-way partitioning */
+/* qsort3(Two-way partitioning) + randomization + isort small subarrays + swap inline */
 
 #include <stdio.h>
 #include <stdlib.h>
