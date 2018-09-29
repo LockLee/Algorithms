@@ -24,7 +24,7 @@ int main()
 	
 	printf("n = %d\n",n);
 	//调用quicksort()函数
-    quicksort(A,0,n-1);   
+   	quicksort(A,0,n-1);   
 	//调用插入排序 
 	isort3(A, n);              			
 	
