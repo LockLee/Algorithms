@@ -34,8 +34,7 @@ int partition(int *A, int l, int u)
 {	
 	int i, j;
 	int t;
-	if (l >= u)
-		return;
+
 	//选取数组第一个元素作为主元
 	t = A[l];
 	// i 和 j 是左右循环下标 
